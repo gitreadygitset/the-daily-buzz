@@ -9,7 +9,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
 </head>
 <body>
-  
+
   <nav class="top-bar navbar">
     <section class="top-bar-left">
     <img src="https://www.freeiconspng.com/thumbs/coffee-icon-png/coffee-icon-png-19.png" alt="The Daily Buzz coffee logo" height="100" width="100">
@@ -33,19 +33,20 @@
       <%= value %>
     </div>
   <%- end -%>
+
 <div class="content">
   <%= yield %>
 </div>
 
   <%= javascript_include_tag 'application' %>
-  
-  <%- if Rails.env.development? || Rails.env.test? -%> 
+
+  <%- if Rails.env.development? || Rails.env.test? -%>
     <%= javascript_tag do %>
       window.railsEnv = '<%= Rails.env %>'
     <%- end -%>
   <%- end -%>
   <%= javascript_pack_tag 'application' %>
-  
+
   <%= yield :extra_footer %>
 </body>
 </html>
