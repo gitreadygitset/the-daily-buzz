@@ -15,3 +15,15 @@
  *= require foundation_and_overrides
 
  */
+
+ body {
+     background-color: #673a03;
+ }
+
+ div.content {
+     max-width: 1000px;
+     background-color: #fcd5a6ff;
+     margin: 0 auto;
+     padding: .5rem 2rem;
+     height: 100%;
+ }

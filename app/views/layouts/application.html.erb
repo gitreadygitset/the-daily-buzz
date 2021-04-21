@@ -5,14 +5,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <%= stylesheet_link_tag 'application', media: 'all' %>
   <%= csrf_meta_tags %>
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
 </head>
 <body>
   
-  <nav class="top-bar">
+  <nav class="top-bar navbar">
+    <section class="top-bar-left">
+    <img src="https://www.freeiconspng.com/thumbs/coffee-icon-png/coffee-icon-png-19.png" alt="The Daily Buzz coffee logo" height="100" width="100">
     <h1><a href="/">TheDailyBuzz</a></h1>
+    </section>
 
     <section class="top-bar-section">
-      <ul class="right">
+      <ul class="right link-section">
         <%- if current_user -%>
           <li><%= link_to 'Sign Out', destroy_user_session_path, method: :delete %></li>
         <%- else -%>
@@ -28,8 +33,9 @@
       <%= value %>
     </div>
   <%- end -%>
-
+<div class="content">
   <%= yield %>
+</div>
 
   <%= javascript_include_tag 'application' %>
   

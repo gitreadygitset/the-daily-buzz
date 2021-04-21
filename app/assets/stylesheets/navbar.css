@@ -1,0 +1,25 @@
+.navbar {
+    background-color: #d5ad7eff;
+}
+
+.top-bar-left {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+h1 > a {
+    color: #673a03;
+    font-family: 'Lobster', cursive;
+}
+
+ul.link-section {
+    background-color: #d5ad7eff;
+    list-style-type: none;
+    margin: 0;
+    padding: 1rem;
+}
+
+li > a {
+    color: #673a03;  
+}
