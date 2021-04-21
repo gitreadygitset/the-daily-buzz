@@ -1,6 +1,10 @@
+$primary: #673a03;
+$secondary:#d5ad7eff;
+$tertiary: #fcd5a6ff;
+
 html,
 body {
-  background-color: #673a03;
+  background-color: $primary;
   overflow-x: hidden;
   margin: 0;
   height: 100%;
@@ -9,7 +13,7 @@ body {
 div.content {
   max-width: 1000px;
   width: 80%;
-  background-color: #fcd5a6ff;
+  background-color: $tertiary;
   margin: 0 auto;
   padding: 0.5rem 2rem;
   height: inherit;

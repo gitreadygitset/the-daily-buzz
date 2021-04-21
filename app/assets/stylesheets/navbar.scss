@@ -1,3 +1,7 @@
+$primary: #673a03;
+$secondary:#d5ad7eff;
+$tertiary: #fcd5a6ff;
+
 .navbar {
     background-color: #d5ad7eff;
 }
@@ -9,17 +13,17 @@
 }
 
 h1 > a {
-    color: #673a03;
+    color: $primary;
     font-family: 'Lobster', cursive;
 }
 
 ul.link-section {
-    background-color: #d5ad7eff;
+    background-color: $secondary;
     list-style-type: none;
     margin: 0;
     padding: 1rem;
 }
 
 li > a {
-    color: #673a03;  
+    color: $primary;
 }
