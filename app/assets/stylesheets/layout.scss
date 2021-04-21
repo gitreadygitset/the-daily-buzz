@@ -1,0 +1,16 @@
+html,
+body {
+  background-color: #673a03;
+  overflow-x: hidden;
+  margin: 0;
+  height: 100%;
+}
+
+div.content {
+  max-width: 1000px;
+  width: 80%;
+  background-color: #fcd5a6ff;
+  margin: 0 auto;
+  padding: 0.5rem 2rem;
+  height: inherit;
+}
