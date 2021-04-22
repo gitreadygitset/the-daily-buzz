@@ -1,7 +1,13 @@
-import React from 'react'
+import React from "react";
+import { BrowserRouter, Route } from "react-router-dom";
+import CoffeeShopShowContainer from "./CoffeeShopShowContainer";
 
 export const App = (props) => {
-  return (<h1>Make It So React</h1>)
-}
+  return (
+    <BrowserRouter>
+      <Route exact path="/coffee_shops/:id" component={CoffeeShopShowContainer} />
+    </BrowserRouter>
+  );
+};
 
-export default App
+export default App;
