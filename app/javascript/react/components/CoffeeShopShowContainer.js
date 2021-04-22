@@ -13,37 +13,40 @@ const CoffeeShopShowContainer = (props) => {
     reviews: [{rating: 2, comment: "This place sucks"},{rating: 5, comment: "Amazing beanwater"} ]
   })
 
-  // let coffeeShopId = props.match.params.id
+  let coffeeShopId = props.match.params.id
   
-  // const fetchCoffeeShop = async() => {
-  //   try {
-  //     let coffeeShopResponse = await fetch(`/api/v1/coffee_shop/${coffeeShopId}`);
-  //     if(coffeeShopResponse.ok){
-  //       coffeeShopResponse = await coffeeShopResponse.json();
-  //       return setCoffeeShop(coffeeShopResponse);
-  //     }
-  //     let error = new Error(`${coffeeShopResponse.status}: ${coffeeShopResponse.statusText}`);
-  //     throw error;
-  //   } catch(error){
-  //     console.error(`Error in fetch: ${error.message}`)
-  //   }
-  // }
+  const fetchCoffeeShop = async() => {
+    try {
+      let coffeeShopResponse = await fetch(`/api/v1/coffee_shop/${coffeeShopId}`);
+      if(coffeeShopResponse.ok){
+        coffeeShopResponse = await coffeeShopResponse.json();
+        return setCoffeeShop(coffeeShopResponse);
+      }
+      let error = new Error(`${coffeeShopResponse.status}: ${coffeeShopResponse.statusText}`);
+      throw error;
+    } catch(error){
+      console.error(`Error in fetch: ${error.message}`)
+    }
+  }
 
-  // useEffect(()=>{
-  //   fetchCoffeeShop()
-  // }, [])
+  useEffect(()=>{
+    fetchCoffeeShop()
+  }, [])
 
   let coffeeShopReviews = coffeeShop.reviews
 
   return (
     <div>
-      <h1>{coffeeShop.name}</h1>
-      {coffeeShop.image_url ? <img src={coffeeShop.image_url}/> : nil }
-      <p>{coffeeShop.address} <br/> {coffeeShop.city} {coffeeShop.state} {coffeeShop.zip} </p>
+      <h1 className="coffee-shop-name">{coffeeShop.name}</h1>
+      {coffeeShop.image_url ? <div className="shop-image-container"><img src={coffeeShop.image_url}/></div> : null }
+      <p>{coffeeShop.address} <br/> {coffeeShop.city}, {coffeeShop.state} {coffeeShop.zip} </p>
       <p>{coffeeShop.description}</p>
-      <ReviewsContainer 
-      reviews={coffeeShopReviews}
-      />
+        <div className="description">
+          <h2>Reviews</h2>
+          <ReviewsContainer 
+          reviews={coffeeShopReviews}
+          />
+        </div>
     </div>
   )
 }

@@ -13,7 +13,7 @@ const ReviewsContainer = props => {
     })
 
     return (
-        <ul>
+        <ul className="reviews">
             {reviewArray}
         </ul>
     )
