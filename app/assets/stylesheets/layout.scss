@@ -7,14 +7,13 @@ body {
   background-color: $primary;
   overflow-x: hidden;
   margin: 0;
-  height: 100%;
 }
 
-div.content {
+.content {
   max-width: 1000px;
   width: 80%;
   background-color: $tertiary;
   margin: 0 auto;
   padding: 0.5rem 2rem;
-  height: inherit;
+  height: 100%;
 }
