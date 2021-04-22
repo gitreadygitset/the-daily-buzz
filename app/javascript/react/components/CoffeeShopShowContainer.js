@@ -17,10 +17,12 @@ const CoffeeShopShowContainer = (props) => {
   
   const fetchCoffeeShop = async() => {
     try {
-      let coffeeShopResponse = await fetch(`/api/v1/coffee_shop/${coffeeShopId}`);
+      let coffeeShopResponse = await fetch(`/api/v1/coffee_shops/${coffeeShopId}`);
+      debugger
       if(coffeeShopResponse.ok){
-        coffeeShopResponse = await coffeeShopResponse.json();
-        return setCoffeeShop(coffeeShopResponse);
+        coffeeShopResponse = await coffeeShopResponse.json()
+        debugger
+        return setCoffeeShop(coffeeShopResponse.coffee_shop)
       }
       let error = new Error(`${coffeeShopResponse.status}: ${coffeeShopResponse.statusText}`);
       throw error;
@@ -41,7 +43,7 @@ const CoffeeShopShowContainer = (props) => {
       {coffeeShop.image_url ? <div className="shop-image-container"><img src={coffeeShop.image_url}/></div> : null }
       <p>{coffeeShop.address} <br/> {coffeeShop.city}, {coffeeShop.state} {coffeeShop.zip} </p>
       <p>{coffeeShop.description}</p>
-        <div className="description">
+        <div>
           <h2>Reviews</h2>
           <ReviewsContainer 
           reviews={coffeeShopReviews}
