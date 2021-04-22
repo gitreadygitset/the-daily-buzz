@@ -8,16 +8,12 @@ const CoffeeShopShowContainer = (props) => {
 
   const fetchCoffeeShop = async () => {
     try {
-      const coffeeShopResponse = await fetch(
-        `/api/v1/coffee_shops/${coffeeShopId}`
-      );
+      const coffeeShopResponse = await fetch(`/api/v1/coffee_shops/${coffeeShopId}`);
       if (coffeeShopResponse.ok) {
-        let parsedCoffeeShopResponse = await coffeeShopResponse.json();
+        const parsedCoffeeShopResponse = await coffeeShopResponse.json();
         return setCoffeeShop(parsedCoffeeShopResponse.coffee_shop);
       }
-      const error = new Error(
-        `${coffeeShopResponse.status}: ${coffeeShopResponse.statusText}`
-      );
+      const error = new Error(`${coffeeShopResponse.status}: ${coffeeShopResponse.statusText}`);
       throw error;
     } catch (error) {
       console.error(`Error in fetch: ${error.message}`);

@@ -8,13 +8,11 @@ const ReviewTile = (props) => {
   }
 
   return (
-    <div>
-      <li>
-        <span>Rating: </span>
-        {coffeeRating}
-        <p>{props.comment}</p>
-      </li>
-    </div>
+    <li>
+      <span>Rating: </span>
+      {coffeeRating}
+      <p>{props.comment}</p>
+    </li>
   );
 };
 
