@@ -1,6 +1,7 @@
 $primary: #673a03;
 $secondary: #d5ad7eff;
 $tertiary: #fcd5a6ff;
+$green: #B2CA90;
 
 html {
   height: 100%;
@@ -16,7 +17,7 @@ body {
 
 form {
   width: 80%;
-  margin: 0 auto; 
+  margin: 0 auto;
 }
 
 form label {
@@ -27,11 +28,11 @@ form label {
 }
 
 input[type="submit"] {
-  background-color: #B2CA90;
+  background-color: $green;
   padding: .75rem;
-  color: $primary; 
+  color: $primary;
   border: 1px solid $primary;
-  font-weight: bold; 
+  font-weight: bold;
 }
 
 .content {
@@ -49,3 +50,6 @@ input[type="submit"] {
   font-weight: bold;
 }
 
+.flash-notice {
+  background-color: $green;
+}
