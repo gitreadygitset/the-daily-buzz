@@ -2,7 +2,7 @@ import React, { useState, useEffect, Fragment } from "react";
 import ReviewsContainer from "./ReviewsContainer";
 
 const CoffeeShopShowContainer = (props) => {
-  const [coffeeShop, setCoffeeShop] = useState({reviews: []});
+  const [coffeeShop, setCoffeeShop] = useState({ reviews: [] });
 
   let coffeeShopId = props.match.params.id;
 
