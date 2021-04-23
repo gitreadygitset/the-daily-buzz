@@ -1,8 +1,11 @@
 import React, { useState, useEffect, Fragment } from "react";
 import ReviewsContainer from "./ReviewsContainer";
+import ReviewFormContainer from "./ReviewFormContainer";
+import { redirect } from "react-router";
 
 const CoffeeShopShowContainer = (props) => {
   const [coffeeShop, setCoffeeShop] = useState({ reviews: [] });
+  const [shouldRedirect, setShouldRedirect] = useState(false);
 
   let coffeeShopId = props.match.params.id;
 
@@ -24,6 +27,27 @@ const CoffeeShopShowContainer = (props) => {
     fetchCoffeeShop();
   }, []);
 
+  const addNewReview = async (formPayload) => {
+    try {
+      const reviewResponse = await fetch(`/api/v1/coffee_shops/${coffeeShopId}/reviews`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify(formPayload),
+      });
+      if (reviewResponse.ok) {
+        const parsedReviewResponse = await reviewResponse.json();
+        coffeeShop.reviews.concat(parsedReviewResponse);
+        setShouldRedirect(true);
+        setCoffeeShop(coffeeShop);
+      }
+    } catch (error) {
+      console.error(`Error in fetch: ${error.message}`);
+    }
+  };
+
   const coffeeShopReviews = coffeeShop.reviews;
 
   return (
@@ -41,6 +65,7 @@ const CoffeeShopShowContainer = (props) => {
       <p>{coffeeShop.description}</p>
       <div>
         <h2>Reviews</h2>
+        <ReviewFormContainer addNewReview={addNewReview} shouldRedirect={shouldRedirect} />
         <ReviewsContainer reviews={coffeeShopReviews} />
       </div>
     </div>
