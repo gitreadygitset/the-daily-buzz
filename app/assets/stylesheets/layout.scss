@@ -16,7 +16,7 @@ body {
 
 form {
   width: 80%;
-  margin: 0 auto; 
+  margin: 0 auto;
 }
 
 form label {
@@ -24,14 +24,16 @@ form label {
   font-family: Georgia, "Times New Roman", Times, serif;
   font-size: 1.2rem;
   float: left;
+  display: block;
 }
 
 input[type="submit"] {
-  background-color: #B2CA90;
-  padding: .75rem;
-  color: $primary; 
+  background-color: #b2ca90;
+  padding: 0.75rem;
+  color: $primary;
   border: 1px solid $primary;
-  font-weight: bold; 
+  font-weight: bold;
+  display: block;
 }
 
 .content {
@@ -45,7 +47,6 @@ input[type="submit"] {
   font-size: 1.2rem;
 }
 .error {
-  color: #BF3310;
+  color: #bf3310;
   font-weight: bold;
 }
-

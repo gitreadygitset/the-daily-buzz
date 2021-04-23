@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import _ from "lodash";
-import { Redirect } from "react-router";
+import ErrorList from "./ErrorList";
 
 const ReviewFormContainer = (props) => {
   const [errors, setErrors] = useState({});
@@ -35,7 +35,6 @@ const ReviewFormContainer = (props) => {
     event.preventDefault();
     if (validForSubmission()) {
       props.addNewReview(formFields);
-      // debugger;
       setFormFields({
         rating: "",
         comment: "",
@@ -47,29 +46,36 @@ const ReviewFormContainer = (props) => {
     <div>
       <h1> New Coffee Review Form </h1>
       <form onSubmit={handleFormSubmit}>
-        <label>
-          Rating
-          <input
-            name="rating"
-            id="rating"
-            type="text"
-            value={formFields.rating}
-            onChange={handleFieldChange}
-          ></input>
-        </label>
-
-        <label>
-          Comment
-          <input
-            name="comment"
-            id="comment"
-            type="text"
-            value={formFields.comment}
-            onChange={handleFieldChange}
-          ></input>
-        </label>
-
-        <input type="submit" value="Submit New Review" />
+        <ErrorList errors={errors} />
+        <div>
+          <label>
+            Rating
+            <input
+              name="rating"
+              id="rating"
+              type="number"
+              min={1}
+              max={5}
+              value={formFields.rating}
+              onChange={handleFieldChange}
+            ></input>
+          </label>
+        </div>
+        <div>
+          <label>
+            Comment
+            <input
+              name="comment"
+              id="comment"
+              type="text"
+              value={formFields.comment}
+              onChange={handleFieldChange}
+            ></input>
+          </label>
+        </div>
+        <div>
+          <input type="submit" value="Submit New Review" />
+        </div>
       </form>
     </div>
   );
