@@ -9,6 +9,11 @@ require File.join(File.dirname(__FILE__), 'support/shoulda')
 require File.join(File.dirname(__FILE__), 'support/valid_attribute')
 require File.join(File.dirname(__FILE__), 'support/factory_bot')
 require 'capybara/rspec'
+
+RSpec.configure do |config|
+  config.include Devise::Test::ControllerHelpers, type: :controller
+  config.include Devise::Test::ControllerHelpers, type: :view
+end
 # Add additional requires below this line. Rails is not loaded until this point!
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
