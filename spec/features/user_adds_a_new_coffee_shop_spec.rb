@@ -8,6 +8,7 @@ feature "User adds a new coffee shop" do
   end
 
   scenario "User correctly fills out the form and submits a coffee shop" do
+    shop_count = CoffeeShop.count
 
     visit new_coffee_shop_path
     fill_in 'Name', with: "Fuel"
@@ -17,19 +18,19 @@ feature "User adds a new coffee shop" do
     fill_in 'Zip', with: "02135"
     click_button 'Add Coffee Shop'
 
-    expect(CoffeeShop.count).to eq(1)
+    expect(CoffeeShop.count).to eq(shop_count+1)
 
-    expect(page).to have_current_path(coffee_shop_path(CoffeeShop.first))
+    expect(page).to have_current_path(coffee_shop_path(CoffeeShop.last))
     expect(page).to have_content('Coffee Shop Added')
   end
 
   scenario "User incorrectly fills out the form and submits a coffee shop" do
-
+    shop_count = CoffeeShop.count
     visit new_coffee_shop_path
     fill_in 'Description', with: 'the'
     click_button 'Add Coffee Shop'
 
-    expect(CoffeeShop.count).to eq(0)
+    expect(CoffeeShop.count).to eq(shop_count)
     expect(page).to have_content("Name can't be blank")
     expect(page).to have_content("Address can't be blank")
     expect(page).to have_content("City can't be blank")
