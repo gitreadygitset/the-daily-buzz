@@ -2,12 +2,36 @@ $primary: #673a03;
 $secondary: #d5ad7eff;
 $tertiary: #fcd5a6ff;
 
-html,
+html {
+  height: 100%;
+}
+
 body {
   background-color: $primary;
-  overflow-x: hidden;
   margin: 0;
   color: $primary;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  min-height: 100%;
+}
+
+form {
+  width: 80%;
+  margin: 0 auto; 
+}
+
+form label {
+  color: $primary;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  font-size: 1.2rem;
+  float: left;
+}
+
+input[type="submit"] {
+  background-color: #B2CA90;
+  padding: .75rem;
+  color: $primary; 
+  border: 1px solid $primary;
+  font-weight: bold; 
 }
 
 .content {
@@ -15,8 +39,13 @@ body {
   width: 80%;
   background-color: $tertiary;
   margin: 0 auto;
-  padding: 0.5rem 2rem;
+  padding: 1rem 2rem;
   height: 100%;
   text-align: center;
   font-size: 1.2rem;
 }
+.error {
+  color: #BF3310;
+  font-weight: bold;
+}
+
