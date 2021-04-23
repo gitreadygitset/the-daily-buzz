@@ -5,7 +5,6 @@ import { redirect } from "react-router";
 
 const CoffeeShopShowContainer = (props) => {
   const [coffeeShop, setCoffeeShop] = useState({ reviews: [] });
-  const [shouldRedirect, setShouldRedirect] = useState(false);
 
   let coffeeShopId = props.match.params.id;
 
@@ -39,9 +38,11 @@ const CoffeeShopShowContainer = (props) => {
       });
       if (reviewResponse.ok) {
         const parsedReviewResponse = await reviewResponse.json();
-        coffeeShop.reviews.concat(parsedReviewResponse);
-        setShouldRedirect(true);
-        setCoffeeShop(coffeeShop);
+
+        setCoffeeShop({
+          ...coffeeShop,
+          reviews: [...coffeeShop.reviews, parsedReviewResponse.review],
+        });
       }
     } catch (error) {
       console.error(`Error in fetch: ${error.message}`);
@@ -65,7 +66,7 @@ const CoffeeShopShowContainer = (props) => {
       <p>{coffeeShop.description}</p>
       <div>
         <h2>Reviews</h2>
-        <ReviewFormContainer addNewReview={addNewReview} shouldRedirect={shouldRedirect} />
+        <ReviewFormContainer addNewReview={addNewReview} />
         <ReviewsContainer reviews={coffeeShopReviews} />
       </div>
     </div>

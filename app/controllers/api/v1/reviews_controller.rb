@@ -1,9 +1,9 @@
 class Api::V1::ReviewsController < ApplicationController
 
-  def new
-    review = Review.new
-    coffee_shop = CoffeeShop.find(params[:coffee_shop_id])
-  end
+  # def new
+  #   review = Review.new
+  #   coffee_shop = CoffeeShop.find(params[:coffee_shop_id])
+  # end
 
   def create
     review = Review.new(review_params)
@@ -17,7 +17,7 @@ class Api::V1::ReviewsController < ApplicationController
     end
   end
   
-private
+  private
 
   def review_params
     params.require(:review).permit(:rating, :comment)

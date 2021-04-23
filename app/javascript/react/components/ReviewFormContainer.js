@@ -35,9 +35,7 @@ const ReviewFormContainer = (props) => {
     event.preventDefault();
     if (validForSubmission()) {
       props.addNewReview(formFields);
-      if (props.shouldRedirect === true) {
-        return <Redirect to={`/coffee_shops/${coffeeShopId}`} />;
-      }
+      // debugger;
       setFormFields({
         rating: "",
         comment: "",
