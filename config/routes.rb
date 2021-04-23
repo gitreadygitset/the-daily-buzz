@@ -3,9 +3,9 @@ Rails.application.routes.draw do
   devise_for :users
 
   get '/coffee_shops/:id', to: 'homes#index'
-
-  resources :coffee_shops, only: [:index]
   
+  resources :coffee_shops, only: [:index, :create, :new]
+
   namespace :api do
     namespace :v1 do
       resources :coffee_shops, only: [:show] do
