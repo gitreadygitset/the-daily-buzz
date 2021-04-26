@@ -10,7 +10,7 @@ class CoffeeShopsController < ApplicationController
   def create
     @coffee_shop = CoffeeShop.new(coffee_shop_params)
     if @coffee_shop.save
-      redirect_to @coffee_shop, notice: 'Coffee Shop Added'
+      redirect_to "/coffee_shops/#{@coffee_shop.id}", notice: 'Coffee Shop Added'
     else
       flash.now[:error] = @coffee_shop.errors.to_hash(true)
       render :new

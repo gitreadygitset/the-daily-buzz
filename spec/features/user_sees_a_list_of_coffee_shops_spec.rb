@@ -14,6 +14,6 @@ feature "User can see a list of coffee shops on the index page" do
     visit coffee_shops_path
     click_link test_shop.name
 
-    expect(page).to have_current_path(coffee_shop_path(test_shop))
+    expect(page).to have_current_path("/coffee_shops/#{test_shop.id}")
   end
 end
