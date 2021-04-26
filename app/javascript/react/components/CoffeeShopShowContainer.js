@@ -1,9 +1,11 @@
-import React, { useState, useEffect, Fragment } from "react";
-import ReviewsContainer from "./ReviewsContainer";
-import ReviewFormContainer from "./ReviewFormContainer";
+import React, { useState, useEffect, Fragment } from 'react';
+import ReviewsContainer from './ReviewsContainer';
+import ReviewFormContainer from './ReviewFormContainer';
+import ErrorList from './ErrorList';
 
 const CoffeeShopShowContainer = (props) => {
   const [coffeeShop, setCoffeeShop] = useState({ reviews: [] });
+  const [errors, setErrors] = useState({});
 
   let coffeeShopId = props.match.params.id;
 
@@ -28,20 +30,24 @@ const CoffeeShopShowContainer = (props) => {
   const addNewReview = async (formPayload) => {
     try {
       const reviewResponse = await fetch(`/api/v1/coffee_shops/${coffeeShopId}/reviews`, {
-        method: "POST",
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
+          'Content-Type': 'application/json',
+          Accept: 'application/json'
         },
-        body: JSON.stringify(formPayload),
+        body: JSON.stringify(formPayload)
       });
       if (reviewResponse.ok) {
         const parsedReviewResponse = await reviewResponse.json();
 
         setCoffeeShop({
           ...coffeeShop,
-          reviews: [...coffeeShop.reviews, parsedReviewResponse.review],
+          reviews: [...coffeeShop.reviews, parsedReviewResponse.review]
         });
+      }
+      if (reviewResponse.status === 401) {
+        const errorMessage = await reviewResponse.json();
+        setErrors({ error: errorMessage.error });
       }
       const error = new Error(`${reviewResponse.status}: ${reviewResponse.statusText}`);
       throw error;
@@ -67,7 +73,7 @@ const CoffeeShopShowContainer = (props) => {
       <p>{coffeeShop.description}</p>
       <div>
         <h2>Reviews</h2>
-        <ReviewFormContainer addNewReview={addNewReview} />
+        <ReviewFormContainer addNewReview={addNewReview} setErrors={setErrors} errors={errors} />
         <ReviewsContainer reviews={coffeeShopReviews} />
       </div>
     </div>
