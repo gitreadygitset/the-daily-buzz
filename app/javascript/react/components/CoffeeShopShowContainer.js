@@ -1,7 +1,6 @@
 import React, { useState, useEffect, Fragment } from "react";
 import ReviewsContainer from "./ReviewsContainer";
 import ReviewFormContainer from "./ReviewFormContainer";
-import { redirect } from "react-router";
 
 const CoffeeShopShowContainer = (props) => {
   const [coffeeShop, setCoffeeShop] = useState({ reviews: [] });
