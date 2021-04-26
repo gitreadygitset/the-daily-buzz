@@ -10,10 +10,10 @@ feature "User can see a list of coffee shops on the index page" do
     expect(page).to have_content("Starbucks")
   end
 
-  scenario "User clicks a link to visit a coffee shop page" do
-    visit coffee_shops_path
-    click_link test_shop.name
+  # scenario "User clicks a link to visit a coffee shop page" do
+  #   visit coffee_shops_path
+  #   click_link test_shop.name
 
-    expect(page).to have_current_path(coffee_shop_path(test_shop))
-  end
+  #   expect(page).to have_current_path(coffee_shop_path(test_shop))
+  # end
 end
