@@ -29,3 +29,6 @@
 yarn-debug.log*
 .yarn-integrity
 .vscode
+
+.jpeg
+
