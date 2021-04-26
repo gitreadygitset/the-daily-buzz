@@ -60,6 +60,7 @@ RSpec.describe Api::V1::ReviewsController, type: :controller do
       expect(returned_json["error"][0]).to eq "Rating is not a number"
     end
 
+
     it "shows an error message when User is not signed in" do
       post_json = {
         review: {
@@ -75,5 +76,6 @@ RSpec.describe Api::V1::ReviewsController, type: :controller do
       expect(response.status).to eq 401
       expect(returned_json["error"]).to eq("You need to sign in or sign up before continuing.")
     end
+
   end
 end

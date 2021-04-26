@@ -14,14 +14,14 @@ RSpec.describe User, type: :model do
     end
 
     context "user is not created without required fields and incorrect parameters" do
+      let!(:test_user_3) { FactoryBot.build(:user, role: "user") }
+      let!(:test_user_4) { FactoryBot.build(:user, username: "") }
       it "does not create a new user if the required role is not 'member' or 'admin'" do
-        test_user_3 = FactoryBot.build(:user, role: "user")
 
         expect(test_user_3.save).to eq(false)
       end
 
       it "does not create a new user if the username is blank" do
-        test_user_4 = FactoryBot.build(:user, username: "")
 
         expect(test_user_4.save).to eq(false)
       end
