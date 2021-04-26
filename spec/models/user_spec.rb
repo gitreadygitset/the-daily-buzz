@@ -23,7 +23,7 @@ RSpec.describe User, type: :model do
       end
 
       it "does not create a new user if the username is blank" do
-        
+
         expect(test_user_4.save).to eq(false)
       end
     end
