@@ -19,7 +19,6 @@ feature "User adds a new coffee shop" do
     click_button 'Add Coffee Shop'
 
     expect(CoffeeShop.count).to eq(shop_count+1)
-
     expect(page).to have_current_path("/coffee_shops/#{CoffeeShop.last.id}")
     expect(page).to have_content('Coffee Shop Added')
   end
