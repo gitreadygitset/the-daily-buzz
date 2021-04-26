@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe Api::V1::ReviewsController, type: :controller do
-  test_shop = FactoryBot.create(:coffee_shop)
+  !let(:test_shop) { FactoryBot.create(:coffee_shop) }
 
 
   describe "POST#create" do
