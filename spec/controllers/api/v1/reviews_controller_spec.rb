@@ -5,7 +5,9 @@ RSpec.describe Api::V1::ReviewsController, type: :controller do
 
 
   describe "POST#create" do
+    let!(:bob) {FactoryBot.create(:user)}
     it "receives review information which is persisted to the database" do
+      sign_in bob
       post_json = {
         review: {
           rating: 3,
@@ -21,6 +23,7 @@ RSpec.describe Api::V1::ReviewsController, type: :controller do
     end
 
     it "returns the json and id of the review" do
+      sign_in bob
       post_json = {
         review: {
           rating: 3,

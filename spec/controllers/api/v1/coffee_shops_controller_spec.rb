@@ -2,10 +2,11 @@ require "rails_helper"
 
 RSpec.describe Api::V1::CoffeeShopsController, type: :controller do
   let!(:test_shop) { FactoryBot.create(:coffee_shop) }
-  let!(:review1) { FactoryBot.create(:review, coffee_shop: test_shop) }
-  let!(:review2) { FactoryBot.create(:review, coffee_shop: test_shop) }
-  let!(:review3) { FactoryBot.create(:review, coffee_shop: test_shop) }
-  let!(:review4) { FactoryBot.create(:review, coffee_shop: test_shop) }
+  let!(:user) { FactoryBot.create(:user) }
+  let!(:review1) { FactoryBot.create(:review, coffee_shop: test_shop, user: user) }
+  let!(:review2) { FactoryBot.create(:review, coffee_shop: test_shop, user: user) }
+  let!(:review3) { FactoryBot.create(:review, coffee_shop: test_shop, user: user) }
+  let!(:review4) { FactoryBot.create(:review, coffee_shop: test_shop, user: user) }
 
 
   describe "GET#show" do
