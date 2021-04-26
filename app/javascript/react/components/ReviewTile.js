@@ -1,5 +1,4 @@
-import React, { Fragment } from "react";
-import { useLocation } from "react-router";
+import React from "react";
 
 const ReviewTile = (props) => {
   let coffeeRating = [];
