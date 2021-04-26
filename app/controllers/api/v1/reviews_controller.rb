@@ -1,5 +1,5 @@
 class Api::V1::ReviewsController < ApplicationController
-  before_action :autheniticate_user!
+  before_action :authenticate_user!
   def create
     review = Review.new(review_params)
     coffee_shop = CoffeeShop.find(params[:coffee_shop_id])
