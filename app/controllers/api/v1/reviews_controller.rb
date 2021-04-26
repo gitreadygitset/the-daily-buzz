@@ -1,10 +1,5 @@
 class Api::V1::ReviewsController < ApplicationController
 
-  # def new
-  #   review = Review.new
-  #   coffee_shop = CoffeeShop.find(params[:coffee_shop_id])
-  # end
-
   def create
     review = Review.new(review_params)
     coffee_shop = CoffeeShop.find(params[:coffee_shop_id])
