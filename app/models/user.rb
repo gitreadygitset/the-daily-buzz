@@ -4,6 +4,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+  has_many :reivews
+
   validates :username, presence: true, uniqueness: true
   validates :role, presence: true, inclusion: { in: ["admin", "member"] }
 end
