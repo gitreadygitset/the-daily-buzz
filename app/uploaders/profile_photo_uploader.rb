@@ -12,4 +12,5 @@ class ProfilePhotoUploader < CarrierWave::Uploader::Base
 
   def default_url
     ActionController::Base.helpers.asset_path("fallback/" + [version_name, "https://daily-buzz-profile-pics.s3.amazonaws.com/coffee-791045_1280.jpg"].compact.join('_'))
+  end
 end
