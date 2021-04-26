@@ -8,6 +8,7 @@ require 'rspec/rails'
 require File.join(File.dirname(__FILE__), 'support/shoulda')
 require File.join(File.dirname(__FILE__), 'support/valid_attribute')
 require File.join(File.dirname(__FILE__), 'support/factory_bot')
+
 require 'capybara/rspec'
 
 RSpec.configure do |config|
