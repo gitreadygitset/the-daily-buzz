@@ -64,8 +64,8 @@ const CoffeeShopShowContainer = (props) => {
       </p>
       <p>{coffeeShop.description}</p>
       <div>
-        <h2>Reviews</h2>
         <ReviewFormContainer addNewReview={addNewReview} />
+        <h2>Reviews</h2>
         <ReviewsContainer reviews={coffeeShopReviews} />
       </div>
     </div>

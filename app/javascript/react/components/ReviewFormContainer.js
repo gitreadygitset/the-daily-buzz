@@ -44,12 +44,11 @@ const ReviewFormContainer = (props) => {
 
   return (
     <div>
-      <h1> New Coffee Review Form </h1>
       <form onSubmit={handleFormSubmit}>
+      <h2 className="formTitle">Have you been to this coffee shop? Add your review!</h2>
         <ErrorList errors={errors} />
         <div>
-          <label>
-            Rating
+          <label>Rating</label>
             <input
               name="rating"
               id="rating"
@@ -59,11 +58,9 @@ const ReviewFormContainer = (props) => {
               value={formFields.rating}
               onChange={handleFieldChange}
             ></input>
-          </label>
         </div>
         <div>
-          <label>
-            Comment
+          <label>Comment</label>
             <input
               name="comment"
               id="comment"
@@ -71,7 +68,6 @@ const ReviewFormContainer = (props) => {
               value={formFields.comment}
               onChange={handleFieldChange}
             ></input>
-          </label>
         </div>
         <div>
           <input type="submit" value="Submit New Review" />
