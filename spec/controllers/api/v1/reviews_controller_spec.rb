@@ -1,8 +1,7 @@
 require "rails_helper"
 
 RSpec.describe Api::V1::ReviewsController, type: :controller do
-  !let(:test_shop) { FactoryBot.create(:coffee_shop) }
-
+  let!(:test_shop) { FactoryBot.create(:coffee_shop) }
 
   describe "POST#create" do
     let!(:bob) {FactoryBot.create(:user)}
@@ -43,5 +42,21 @@ RSpec.describe Api::V1::ReviewsController, type: :controller do
       expect(returned_json["review"]["rating"]).to eq 3
       expect(returned_json["review"]["comment"]).to eq "Place is great. Would recommend to a friend!!"
     end
+  end
+
+  it "shows an error message when fields are left blank" do
+    post_json = {
+        review: {
+          rating: nil,
+          comment: ""
+        },
+        coffee_shop_id: test_shop.id
+      }
+
+      post :create, params: post_json, format: :json
+      returned_json = JSON.parse(response.body)
+
+      expect(response.status).to eq 422
+      expect(returned_json["error"][0]).to eq "Rating is not a number"
   end
 end

@@ -1,7 +1,7 @@
 $primary: #673a03;
 $secondary: #d5ad7eff;
 $tertiary: #fcd5a6ff;
-$green: #B2CA90;
+$green: #b2ca90;
 
 html {
   height: 100%;
@@ -30,7 +30,7 @@ form label {
 
 input[type="submit"] {
   background-color: $green;
-  padding: .75rem;
+  padding: 0.75rem;
   color: $primary;
   border: 1px solid $primary;
   font-weight: bold;
@@ -54,4 +54,3 @@ input[type="submit"] {
 .flash-notice {
   background-color: $green;
 }
-
