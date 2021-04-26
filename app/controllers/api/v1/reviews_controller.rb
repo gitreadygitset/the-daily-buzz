@@ -7,8 +7,8 @@ class Api::V1::ReviewsController < ApplicationController
     
     if review.save
       render json: { review: review }
-    else 
-      render json: { error: fortune.errors.full_messages }, status: :unprocessable_entity
+    else
+      render json: { error: review.errors.full_messages }, status: :unprocessable_entity
     end
   end
   
