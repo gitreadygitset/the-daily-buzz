@@ -42,11 +42,10 @@ RSpec.describe Api::V1::ReviewsController, type: :controller do
       expect(returned_json["review"]["rating"]).to eq 3
       expect(returned_json["review"]["comment"]).to eq "Place is great. Would recommend to a friend!!"
     end
-  end
 
-  it "shows an error message when fields are left blank" do
-    sign_in bob
-    post_json = {
+    it "shows an error message when fields are left blank" do
+      sign_in bob
+      post_json = {
         review: {
           rating: nil,
           comment: ""
@@ -59,5 +58,6 @@ RSpec.describe Api::V1::ReviewsController, type: :controller do
 
       expect(response.status).to eq 422
       expect(returned_json["error"][0]).to eq "Rating is not a number"
+    end
   end
 end
