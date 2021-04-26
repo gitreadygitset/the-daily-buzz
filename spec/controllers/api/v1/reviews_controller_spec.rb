@@ -45,6 +45,7 @@ RSpec.describe Api::V1::ReviewsController, type: :controller do
   end
 
   it "shows an error message when fields are left blank" do
+    sign_in bob
     post_json = {
         review: {
           rating: nil,
