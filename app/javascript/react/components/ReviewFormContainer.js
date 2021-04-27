@@ -42,6 +42,14 @@ const ReviewFormContainer = (props) => {
     }
   };
 
+  const clearForm = (event) => {
+    event.preventDefault();
+    setFormFields({
+      rating: "",
+      comment: "",
+    });
+  };
+
   return (
     <div>
       <form onSubmit={handleFormSubmit}>
@@ -57,7 +65,7 @@ const ReviewFormContainer = (props) => {
               max={5}
               value={formFields.rating}
               onChange={handleFieldChange}
-            ></input>
+            />
         </div>
         <div>
           <label>Comment</label>
@@ -67,10 +75,13 @@ const ReviewFormContainer = (props) => {
               type="text"
               value={formFields.comment}
               onChange={handleFieldChange}
-            ></input>
+            />
         </div>
         <div>
           <input type="submit" value="Submit New Review" />
+        </div>
+        <div>
+          <input type="button" value="Clear Form" onClick={clearForm} />
         </div>
       </form>
     </div>

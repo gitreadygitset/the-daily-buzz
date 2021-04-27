@@ -43,6 +43,8 @@ const CoffeeShopShowContainer = (props) => {
           reviews: [...coffeeShop.reviews, parsedReviewResponse.review],
         });
       }
+      const error = new Error(`${reviewResponse.status}: ${reviewResponse.statusText}`);
+      throw error;
     } catch (error) {
       console.error(`Error in fetch: ${error.message}`);
     }

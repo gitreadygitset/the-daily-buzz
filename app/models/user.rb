@@ -6,6 +6,8 @@ class User < ApplicationRecord
 
   has_many :reivews
 
+  # mount_uploader :profile_photo, ProfilePhotoUploader
+  
   validates :username, presence: true, uniqueness: true
   validates :role, presence: true, inclusion: { in: ["admin", "member"] }
 end
