@@ -3,9 +3,10 @@ import ReviewsContainer from './ReviewsContainer';
 import ReviewFormContainer from './ReviewFormContainer';
 
 const CoffeeShopShowContainer = (props) => {
-  const [coffeeShop, setCoffeeShop] = useState({ reviews: [] });
+  const [coffeeShop, setCoffeeShop] = useState({});
+  const [reviews, setReviews] = useState([]);
+  const [currentUser, setCurrentUser] = useState({});
   const [errors, setErrors] = useState({});
-  let currentUser = coffeeShop.current_user;
   let coffeeShopId = props.match.params.id;
 
   const fetchCoffeeShop = async () => {
@@ -13,10 +14,19 @@ const CoffeeShopShowContainer = (props) => {
       const coffeeShopResponse = await fetch(`/api/v1/coffee_shops/${coffeeShopId}`);
       if (coffeeShopResponse.ok) {
         const parsedCoffeeShopResponse = await coffeeShopResponse.json();
-        return setCoffeeShop(parsedCoffeeShopResponse.coffee_shop);
+        const coffeeShop = ({ name, description, image_url, address, city, state, zip }) => ({
+          name,
+          description,
+          image_url,
+          address,
+          city,
+          state,
+          zip
+        });
+        setCoffeeShop(coffeeShop(parsedCoffeeShopResponse.coffee_shop));
+        setReviews(parsedCoffeeShopResponse.coffee_shop.reviews);
+        setCurrentUser(parsedCoffeeShopResponse.coffee_shop.current_user);
       }
-      const error = new Error(`${coffeeShopResponse.status}: ${coffeeShopResponse.statusText}`);
-      throw error;
     } catch (error) {
       console.error(`Error in fetch: ${error.message}`);
     }
@@ -39,10 +49,7 @@ const CoffeeShopShowContainer = (props) => {
       if (reviewResponse.ok) {
         const parsedReviewResponse = await reviewResponse.json();
 
-        setCoffeeShop({
-          ...coffeeShop,
-          reviews: [...coffeeShop.reviews, parsedReviewResponse.review]
-        });
+        setReviews([...coffeeShop.reviews, parsedReviewResponse.review]);
       }
       if (reviewResponse.status === 401 || reviewResponse.status === 422) {
         const errorMessage = await reviewResponse.json();
@@ -54,9 +61,6 @@ const CoffeeShopShowContainer = (props) => {
       console.error(`Error in fetch: ${error.message}`);
     }
   };
-
-  const coffeeShopReviews = coffeeShop.reviews;
-
   return (
     <div>
       <h1 className="coffee-shop-name">{coffeeShop.name}</h1>
@@ -78,7 +82,7 @@ const CoffeeShopShowContainer = (props) => {
           errors={errors}
           currentUser={currentUser}
         />
-        <ReviewsContainer reviews={coffeeShopReviews} />
+        <ReviewsContainer reviews={reviews} />
       </div>
     </div>
   );

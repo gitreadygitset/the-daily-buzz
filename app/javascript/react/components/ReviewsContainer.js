@@ -1,5 +1,5 @@
-import React from "react";
-import ReviewTile from "./ReviewTile";
+import React from 'react';
+import ReviewTile from './ReviewTile';
 
 const ReviewsContainer = (props) => {
   if (props.reviews.length > 0) {
