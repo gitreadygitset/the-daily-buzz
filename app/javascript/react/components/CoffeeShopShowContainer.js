@@ -4,6 +4,7 @@ import ReviewFormContainer from "./ReviewFormContainer";
 
 const CoffeeShopShowContainer = (props) => {
   const [coffeeShop, setCoffeeShop] = useState({ reviews: [] });
+  let currentUser = coffeeShop.current_user
 
   let coffeeShopId = props.match.params.id;
 
@@ -31,7 +32,7 @@ const CoffeeShopShowContainer = (props) => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Accept: "application/json",
+          "Accept": "application/json",
         },
         body: JSON.stringify(formPayload)
       });
@@ -62,13 +63,17 @@ const CoffeeShopShowContainer = (props) => {
       });
       if (deleteResponse.ok) {
         const parsedDeleteResponse = await deleteResponse.json();
-
-        let remainingReviews = coffeeShop.reviews.filter(exisitingReview => {exisitingReview.id !== review.id})
-        setCoffeeShop({
+        if(!parsedDeleteResponse.error){
+          let remainingReviews = coffeeShop.reviews.filter(existingReview => existingReview.id !== reviewId)
+        
+        return setCoffeeShop({
           ...coffeeShop,
           reviews: remainingReviews
         });
+      } else {
+        return console.log (parsedDeleteResponse.error)
       }
+    }
       const error = new Error(`${deleteResponse.status}: ${deleteResponse.statusText}`);
       throw error;
     } catch (error) {
@@ -93,8 +98,8 @@ const CoffeeShopShowContainer = (props) => {
       <p>{coffeeShop.description}</p>
       <div>
         <h2>Reviews</h2>
-        <ReviewFormContainer addNewReview={addNewReview} />
-        <ReviewsContainer reviews={coffeeShopReviews} deleteReview={deleteReview}/>
+        <ReviewFormContainer addNewReview={addNewReview}/>
+        <ReviewsContainer reviews={coffeeShopReviews} deleteReview={deleteReview} currentUser={currentUser}/>
       </div>
     </div>
   );

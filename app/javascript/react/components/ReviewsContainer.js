@@ -9,7 +9,14 @@ const ReviewsContainer = (props) => {
         props.deleteReview(review.id)
       }
 
-      return <ReviewTile key={review.id} id={review.id} rating={review.rating} comment={review.comment} handleClick={handleClick}/>;
+      return <ReviewTile 
+        key={review.id} 
+        id={review.id} 
+        rating={review.rating} 
+        comment={review.comment} 
+        handleClick={handleClick} 
+        currentUser={props.currentUser}
+      />;
     });
     return <ul className="reviews">{reviewArray}</ul>;
   } else {

@@ -10,7 +10,7 @@ class ProfilePhotoUploader < CarrierWave::Uploader::Base
     "public/testuploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
   end
 
-  def default_url
-    ActionController::Base.helpers.asset_path("fallback/" + [version_name, "https://daily-buzz-profile-pics.s3.amazonaws.com/coffee-791045_1280.jpg"].compact.join('_'))
-  end
+  # def default_url
+  #   ActionController::Base.helpers.asset_path("fallback/" + [version_name, "https://daily-buzz-profile-pics.s3.amazonaws.com/coffee-791045_1280.jpg"].compact.join('_'))
+  # end
 end
