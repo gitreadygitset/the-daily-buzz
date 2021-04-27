@@ -1,6 +1,6 @@
 class Api::V1::ReviewsController < ApplicationController
-before_action :authenticate_user!
-before_action :authorize_user, except: [:create]
+  before_action :authenticate_user!
+  before_action :authorize_user, except: [:create]
 
   def create
     review = Review.new(review_params)

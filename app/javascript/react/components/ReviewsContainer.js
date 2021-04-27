@@ -2,7 +2,7 @@ import React from "react";
 import ReviewTile from "./ReviewTile";
 
 const ReviewsContainer = (props) => {
-  
+
   if (props.reviews.length > 0) {
     const reviewArray = props.reviews.map((review) => {
       const handleClick = () => {

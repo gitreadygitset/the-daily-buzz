@@ -15,6 +15,7 @@ require 'capybara/rspec'
 RSpec.configure do |config|
   config.include Devise::Test::ControllerHelpers, type: :controller
   config.include Devise::Test::ControllerHelpers, type: :view
+  config.include Devise::Test::IntegrationHelpers, type: :feature
 end
 # Add additional requires below this line. Rails is not loaded until this point!
 
