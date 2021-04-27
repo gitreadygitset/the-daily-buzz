@@ -1,8 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe CoffeeShop, type: :model do
-  let!(:test_shop_1) { FactoryBot.create(:coffee_shop) }
-  let!(:test_shop_2) { FactoryBot.build(:coffee_shop, name: "" ) }
+  let!(:bob) { FactoryBot.create(:user)}
+  let!(:test_shop_1) { FactoryBot.create(:coffee_shop, user: bob) }
+  let!(:test_shop_2) { FactoryBot.build(:coffee_shop, name: "", user: bob) }
 
 
   describe "#create" do
@@ -18,9 +19,9 @@ RSpec.describe CoffeeShop, type: :model do
       end
 
       context "Coffee Shop is not created without required fields and parameters" do
-        let!(:test_shop_4) { FactoryBot.build(:coffee_shop, zip: "02" ) }
-        let!(:test_shop_5) { FactoryBot.build(:coffee_shop, zip: "021456") }
-        let!(:test_shop_6) { FactoryBot.build(:coffee_shop, description: "This is short" ) }
+        let!(:test_shop_4) { FactoryBot.build(:coffee_shop, zip: "02", user: bob) }
+        let!(:test_shop_5) { FactoryBot.build(:coffee_shop, zip: "021456", user: bob) }
+        let!(:test_shop_6) { FactoryBot.build(:coffee_shop, description: "This is short", user: bob) }
 
         it "does not create a new coffee shop if a required attribute is missing" do
           expect(test_shop_2.save).to eq(false)

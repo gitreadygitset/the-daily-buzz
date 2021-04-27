@@ -9,6 +9,7 @@ class CoffeeShopsController < ApplicationController
 
   def create
     @coffee_shop = CoffeeShop.new(coffee_shop_params)
+    @coffee_shop.user = current_user
     if @coffee_shop.save
       redirect_to "/coffee_shops/#{@coffee_shop.id}", notice: 'Coffee Shop Added'
     else

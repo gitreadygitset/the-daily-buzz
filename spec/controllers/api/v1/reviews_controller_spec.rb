@@ -1,10 +1,10 @@
 require "rails_helper"
 
 RSpec.describe Api::V1::ReviewsController, type: :controller do
-  let!(:test_shop) { FactoryBot.create(:coffee_shop) }
+  let!(:bob) { FactoryBot.create(:user) }
+  let!(:test_shop) { FactoryBot.create(:coffee_shop, user: bob) }
 
   describe "POST#create" do
-    let!(:bob) {FactoryBot.create(:user)}
     it "receives review information which is persisted to the database" do
       sign_in bob
       post_json = {
