@@ -5,6 +5,7 @@ const ReviewsContainer = (props) => {
 
   if (props.reviews.length > 0) {
     const reviewArray = props.reviews.map((review) => {
+
       const handleClick = () => {
         props.deleteReview(review.id)
       }
@@ -17,6 +18,7 @@ const ReviewsContainer = (props) => {
         handleClick={handleClick} 
         currentUser={props.currentUser}
       />;
+
     });
     return <ul className="reviews">{reviewArray}</ul>;
   } else {
