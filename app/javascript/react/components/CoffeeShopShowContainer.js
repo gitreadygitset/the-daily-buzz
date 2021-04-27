@@ -5,7 +5,7 @@ import ReviewFormContainer from './ReviewFormContainer';
 const CoffeeShopShowContainer = (props) => {
   const [coffeeShop, setCoffeeShop] = useState({ reviews: [] });
   const [errors, setErrors] = useState({});
-
+  let currentUser = coffeeShop.current_user;
   let coffeeShopId = props.match.params.id;
 
   const fetchCoffeeShop = async () => {
@@ -72,7 +72,12 @@ const CoffeeShopShowContainer = (props) => {
       <p>{coffeeShop.description}</p>
       <div>
         <h2>Reviews</h2>
-        <ReviewFormContainer addNewReview={addNewReview} setErrors={setErrors} errors={errors} />
+        <ReviewFormContainer
+          addNewReview={addNewReview}
+          setErrors={setErrors}
+          errors={errors}
+          currentUser={currentUser}
+        />
         <ReviewsContainer reviews={coffeeShopReviews} />
       </div>
     </div>

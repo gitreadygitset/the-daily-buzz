@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import _ from 'lodash';
 import ErrorList from './ErrorList';
 
@@ -48,7 +49,13 @@ const ReviewFormContainer = (props) => {
       comment: ''
     });
   };
-
+  if (!props.current_user) {
+    return (
+      <div>
+        <h4>Please sign in to leave a review</h4>
+      </div>
+    );
+  }
   return (
     <div>
       <h1> New Coffee Review Form </h1>
