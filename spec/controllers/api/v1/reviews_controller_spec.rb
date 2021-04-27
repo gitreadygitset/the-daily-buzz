@@ -1,19 +1,25 @@
 require "rails_helper"
 
 RSpec.describe Api::V1::ReviewsController, type: :controller do
-  let!(:test_shop) { FactoryBot.create(:coffee_shop) }
-  let!(:test_user) {FactoryBot.create(:user) }
+  let!(:test_shop) { FactoryBot.create(:coffee_shop, user: user) }
+  let!(:user) { FactoryBot.create(:user) }
+  let!(:review1) { FactoryBot.create(:review, coffee_shop: test_shop, user: user) }
+  let!(:review2) { FactoryBot.create(:review, coffee_shop: test_shop, user: user) }
+  let!(:review3) { FactoryBot.create(:review, coffee_shop: test_shop, user: user) }
+  let!(:review4) { FactoryBot.create(:review, coffee_shop: test_shop, user: user) }
   
   describe "POST#create" do
     it "receives review information which is persisted to the database" do
+      sign_in user
       post_json = {
         review: {
           rating: 3,
-          comment: "Place is great. Would recommend to a friend!!"
+          comment: "Place is great. Would recommend to a friend!!",
+          user_id: user.id
         },
         coffee_shop_id: test_shop.id
       }
-
+      
       prev_count = Review.count
       post :create, params: post_json, format: :json
       returned_json = JSON.parse(response.body)
@@ -21,10 +27,12 @@ RSpec.describe Api::V1::ReviewsController, type: :controller do
     end
 
     it "returns the json and id of the review" do
+      sign_in user
       post_json = {
         review: {
           rating: 3,
-          comment: "Place is great. Would recommend to a friend!!"
+          comment: "Place is great. Would recommend to a friend!!",
+          user_id: user.id
         },
         coffee_shop_id: test_shop.id
       }
@@ -42,6 +50,7 @@ RSpec.describe Api::V1::ReviewsController, type: :controller do
     end
 
   it "shows an error message when fields are left blank" do
+    sign_in user
     post_json = {
         review: {
           rating: nil,
