@@ -1,7 +1,6 @@
 import React, { useState, useEffect, Fragment } from 'react';
 import ReviewsContainer from './ReviewsContainer';
 import ReviewFormContainer from './ReviewFormContainer';
-import ErrorList from './ErrorList';
 
 const CoffeeShopShowContainer = (props) => {
   const [coffeeShop, setCoffeeShop] = useState({ reviews: [] });
@@ -45,7 +44,7 @@ const CoffeeShopShowContainer = (props) => {
           reviews: [...coffeeShop.reviews, parsedReviewResponse.review]
         });
       }
-      if (reviewResponse.status === 401) {
+      if (reviewResponse.status === 401 || reviewResponse.status === 422) {
         const errorMessage = await reviewResponse.json();
         setErrors({ error: errorMessage.error });
       }
