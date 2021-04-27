@@ -1,6 +1,7 @@
 class Api::V1::ReviewsController < ApplicationController
 before_action :authenticate_user!
 before_action :authorize_user, except: [:create]
+
   def create
     review = Review.new(review_params)
     coffee_shop = CoffeeShop.find(params[:coffee_shop_id])
@@ -29,7 +30,7 @@ before_action :authorize_user, except: [:create]
 
   def authorize_user
     if !user_signed_in? || !(current_user.role == "admin")
-      render json: {error: ["Only admins have access to this feature"]}
+      render json: { error: ["Only admins have access to this feature"] }
     end
   end
 end

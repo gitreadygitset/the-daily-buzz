@@ -51,13 +51,13 @@ const CoffeeShopShowContainer = (props) => {
     }
   };
 
-  const deleteReview = async(reviewId) => {
+  const deleteReview = async (reviewId) => {
     try {
       const deleteResponse = await fetch(`/api/v1/coffee_shops/${coffeeShopId}/reviews/${reviewId}`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
-          "Accept": "application/json",
+          "Accept": "application/json"
         },
         body: JSON.stringify({id: reviewId})
       });
@@ -104,6 +104,5 @@ const CoffeeShopShowContainer = (props) => {
     </div>
   );
 };
-
 
 export default CoffeeShopShowContainer;
