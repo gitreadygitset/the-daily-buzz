@@ -4,7 +4,7 @@ import ReviewTile from "./ReviewTile";
 const ReviewsContainer = (props) => {
   if (props.reviews.length > 0) {
     const reviewArray = props.reviews.map((review) => {
-      return <ReviewTile key={review.id} rating={review.rating} comment={review.comment} />;
+      return <ReviewTile key={review.id} rating={review.rating} comment={review.comment}/>;
     });
     return <ul className="reviews">{reviewArray}</ul>;
   } else {
