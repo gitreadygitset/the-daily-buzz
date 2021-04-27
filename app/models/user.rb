@@ -4,7 +4,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  has_many :reivews
+  has_many :reviews
+  has_many :coffee_shops
 
   # mount_uploader :profile_photo, ProfilePhotoUploader
   

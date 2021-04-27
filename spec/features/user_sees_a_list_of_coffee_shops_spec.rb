@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 feature "User can see a list of coffee shops on the index page" do
-
-  let!(:test_shop) { FactoryBot.create(:coffee_shop) }
+  let!(:user) { FactoryBot.create(:user) }
+  let!(:test_shop) { FactoryBot.create(:coffee_shop, user: user) }
 
   scenario "User visits index page" do
     visit coffee_shops_path

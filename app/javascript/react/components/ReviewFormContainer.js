@@ -1,33 +1,33 @@
-import React, { useState, useEffect } from "react";
-import _ from "lodash";
-import ErrorList from "./ErrorList";
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import _ from 'lodash';
+import ErrorList from './ErrorList';
 
 const ReviewFormContainer = (props) => {
-  const [errors, setErrors] = useState({});
   const [formFields, setFormFields] = useState({
-    rating: "",
-    comment: "",
+    rating: '',
+    comment: ''
   });
 
   const validForSubmission = () => {
     let submitErrors = {};
-    const requiredFields = ["rating", "comment"];
+    const requiredFields = ['rating', 'comment'];
     requiredFields.forEach((field) => {
-      if (formFields[field].trim() === "") {
+      if (formFields[field].trim() === '') {
         submitErrors = {
           ...submitErrors,
-          [field]: "is blank",
+          [field]: 'is blank'
         };
       }
     });
-    setErrors(submitErrors);
+    props.setErrors(submitErrors);
     return _.isEmpty(submitErrors);
   };
 
   const handleFieldChange = (event) => {
     setFormFields({
       ...formFields,
-      [event.currentTarget.name]: event.currentTarget.value,
+      [event.currentTarget.name]: event.currentTarget.value
     });
   };
 
@@ -36,8 +36,8 @@ const ReviewFormContainer = (props) => {
     if (validForSubmission()) {
       props.addNewReview(formFields);
       setFormFields({
-        rating: "",
-        comment: "",
+        rating: '',
+        comment: ''
       });
     }
   };
@@ -45,16 +45,21 @@ const ReviewFormContainer = (props) => {
   const clearForm = (event) => {
     event.preventDefault();
     setFormFields({
-      rating: "",
-      comment: "",
+      rating: '',
+      comment: ''
     });
   };
-
+  if (!props.current_user) {
+    return (
+      <div>
+        <h4>Please sign in to leave a review</h4>
+      </div>
+    );
+  }
   return (
     <div>
       <form onSubmit={handleFormSubmit}>
-      <h2 className="formTitle">Have you been to this coffee shop? Add your review!</h2>
-        <ErrorList errors={errors} />
+        <ErrorList errors={props.errors} />
         <div>
           <label>Rating</label>
             <input
