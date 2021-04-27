@@ -11,6 +11,7 @@ const ReviewTile = (props) => {
       <span>Rating: </span>
       {coffeeRating}
       <p>{props.comment}</p>
+      <button type="button" className="alert button" onClick={props.handleClick}>Delete</button>
     </li>
   );
 };

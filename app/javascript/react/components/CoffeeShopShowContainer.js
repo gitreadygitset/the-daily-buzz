@@ -33,14 +33,14 @@ const CoffeeShopShowContainer = (props) => {
           "Content-Type": "application/json",
           Accept: "application/json",
         },
-        body: JSON.stringify(formPayload),
+        body: JSON.stringify(formPayload)
       });
       if (reviewResponse.ok) {
         const parsedReviewResponse = await reviewResponse.json();
 
         setCoffeeShop({
           ...coffeeShop,
-          reviews: [...coffeeShop.reviews, parsedReviewResponse.review],
+          reviews: [...coffeeShop.reviews, parsedReviewResponse.review]
         });
       }
       const error = new Error(`${reviewResponse.status}: ${reviewResponse.statusText}`);
@@ -50,6 +50,32 @@ const CoffeeShopShowContainer = (props) => {
     }
   };
 
+  const deleteReview = async(reviewId) => {
+    try {
+      const deleteResponse = await fetch(`/api/v1/coffee_shops/${coffeeShopId}/reviews/${reviewId}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json",
+        },
+        body: JSON.stringify({id: reviewId})
+      });
+      if (deleteResponse.ok) {
+        const parsedDeleteResponse = await deleteResponse.json();
+
+        let remainingReviews = coffeeShop.reviews.filter(exisitingReview => {exisitingReview.id !== review.id})
+        setCoffeeShop({
+          ...coffeeShop,
+          reviews: remainingReviews
+        });
+      }
+      const error = new Error(`${deleteResponse.status}: ${deleteResponse.statusText}`);
+      throw error;
+    } catch (error) {
+      console.error(`Error in fetch: ${error.message}`);
+    }
+  };
+  
   const coffeeShopReviews = coffeeShop.reviews;
 
   return (
@@ -68,10 +94,11 @@ const CoffeeShopShowContainer = (props) => {
       <div>
         <h2>Reviews</h2>
         <ReviewFormContainer addNewReview={addNewReview} />
-        <ReviewsContainer reviews={coffeeShopReviews} />
+        <ReviewsContainer reviews={coffeeShopReviews} deleteReview={deleteReview}/>
       </div>
     </div>
   );
 };
+
 
 export default CoffeeShopShowContainer;
