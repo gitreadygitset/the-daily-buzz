@@ -14,6 +14,7 @@ const ReviewTile = (props) => {
 
   return (
     <li>
+      <i class="fas fa-arrow-up" onClick={props.voteClick}></i>
       <span>Rating: </span>
       {coffeeRating}
       <p>{props.comment}</p>

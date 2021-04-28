@@ -8,6 +8,10 @@ const ReviewsContainer = (props) => {
         props.deleteReview(review.id);
       };
 
+      const voteClick = () => {
+        props.addUserVote(review.id);
+      };
+
       return (
         <ReviewTile
           key={review.id}
@@ -15,6 +19,7 @@ const ReviewsContainer = (props) => {
           rating={review.rating}
           comment={review.comment}
           handleClick={handleClick}
+          voteClick={voteClick}
           currentUser={props.currentUser}
         />
       );
