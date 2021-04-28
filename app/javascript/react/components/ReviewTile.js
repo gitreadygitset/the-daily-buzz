@@ -5,15 +5,13 @@ const ReviewTile = (props) => {
   for (let i = 0; i < props.review.rating; i++) {
     coffeeRating.push(<i className="fa fa-coffee" aria-hidden="true"></i>);
   }
-  let deleteButton;
+  let deleteButton = null;
   if (props.currentUser?.role === 'admin') {
     deleteButton = (
       <button type="button" className="alert button" onClick={props.handleClick}>
         Delete
       </button>
     );
-  } else {
-    deleteButton = null;
   }
 
   return (
