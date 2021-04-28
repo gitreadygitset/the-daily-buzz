@@ -94,8 +94,6 @@ const CoffeeShopShowContainer = (props) => {
     }
   };
 
-  const coffeeShopReviews = coffeeShop.reviews;
-
   return (
     <div>
       <h1 className="coffee-shop-name">{coffeeShop.name}</h1>
@@ -117,11 +115,7 @@ const CoffeeShopShowContainer = (props) => {
           errors={errors}
           currentUser={currentUser}
         />
-        <ReviewsContainer
-          reviews={coffeeShopReviews}
-          deleteReview={deleteReview}
-          currentUser={currentUser}
-        />
+        <ReviewsContainer reviews={reviews} deleteReview={deleteReview} currentUser={currentUser} />
       </div>
     </div>
   );
