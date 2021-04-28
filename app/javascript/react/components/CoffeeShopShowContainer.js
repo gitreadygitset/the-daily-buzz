@@ -14,14 +14,24 @@ const CoffeeShopShowContainer = (props) => {
       const coffeeShopResponse = await fetch(`/api/v1/coffee_shops/${coffeeShopId}`);
       if (coffeeShopResponse.ok) {
         const parsedCoffeeShopResponse = await coffeeShopResponse.json();
-        const coffeeShop = ({ name, description, image_url, address, city, state, zip }) => ({
+        const coffeeShop = ({
           name,
           description,
           image_url,
           address,
           city,
           state,
-          zip
+          zip,
+          average_rating
+        }) => ({
+          name,
+          description,
+          image_url,
+          address,
+          city,
+          state,
+          zip,
+          average_rating
         });
         setCoffeeShop(coffeeShop(parsedCoffeeShopResponse.coffee_shop));
         setReviews(parsedCoffeeShopResponse.coffee_shop.reviews);
@@ -94,9 +104,15 @@ const CoffeeShopShowContainer = (props) => {
     }
   };
 
+  let coffeeRating = [];
+  for (let i = 0; i < coffeeShop.average_rating; i++) {
+    coffeeRating.push(<i className="fa fa-coffee" aria-hidden="true"></i>);
+  }
   return (
     <div>
       <h1 className="coffee-shop-name">{coffeeShop.name}</h1>
+      <p className="rating"> Rating {coffeeRating} </p>
+
       {coffeeShop.image_url ? (
         <div className="shop-image-container">
           <img src={coffeeShop.image_url} />

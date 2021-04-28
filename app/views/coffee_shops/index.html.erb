@@ -1,7 +1,8 @@
 <h1>Coffee Shops</h1>
 <ul class="coffee-shop-list">
   <% @coffee_shops.each do |shop| %>
-  <li><%= link_to shop.name, "/coffee_shops/#{shop.id}" %></li>
+  <% average_rating = shop.reviews.length > 0 ? "- Rating #{shop.average_rating}" : '' %>
+  <li><strong><%= link_to shop.name, "/coffee_shops/#{shop.id}" %></strong> <%= average_rating %></li>
   <% end %>
 </ul>
 <div class="form-link">
