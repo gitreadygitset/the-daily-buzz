@@ -3,7 +3,9 @@ import ReviewsContainer from './ReviewsContainer';
 import ReviewFormContainer from './ReviewFormContainer';
 
 const CoffeeShopShowContainer = (props) => {
-  const [coffeeShop, setCoffeeShop] = useState({ reviews: [] });
+  const [coffeeShop, setCoffeeShop] = useState({});
+  const [reviews, setReviews] = useState([]);
+  const [currentUser, setCurrentUser] = useState({});
   const [errors, setErrors] = useState({});
   const [userVote, setUserVote] = useState(0)
   let currentUser = coffeeShop.current_user;
@@ -14,10 +16,19 @@ const CoffeeShopShowContainer = (props) => {
       const coffeeShopResponse = await fetch(`/api/v1/coffee_shops/${coffeeShopId}`);
       if (coffeeShopResponse.ok) {
         const parsedCoffeeShopResponse = await coffeeShopResponse.json();
-        return setCoffeeShop(parsedCoffeeShopResponse.coffee_shop);
+        const coffeeShop = ({ name, description, image_url, address, city, state, zip }) => ({
+          name,
+          description,
+          image_url,
+          address,
+          city,
+          state,
+          zip
+        });
+        setCoffeeShop(coffeeShop(parsedCoffeeShopResponse.coffee_shop));
+        setReviews(parsedCoffeeShopResponse.coffee_shop.reviews);
+        setCurrentUser(parsedCoffeeShopResponse.coffee_shop.current_user);
       }
-      const error = new Error(`${coffeeShopResponse.status}: ${coffeeShopResponse.statusText}`);
-      throw error;
     } catch (error) {
       console.error(`Error in fetch: ${error.message}`);
     }
@@ -32,18 +43,15 @@ const CoffeeShopShowContainer = (props) => {
       const reviewResponse = await fetch(`/api/v1/coffee_shops/${coffeeShopId}/reviews`, {
         method: 'POST',
         headers: {
-          "Content-Type": "application/json",
-          "Accept": "application/json",
+          'Content-Type': 'application/json',
+          Accept: 'application/json'
         },
         body: JSON.stringify(formPayload)
       });
       if (reviewResponse.ok) {
         const parsedReviewResponse = await reviewResponse.json();
 
-        setCoffeeShop({
-          ...coffeeShop,
-          reviews: [...coffeeShop.reviews, parsedReviewResponse.review]
-        });
+        setReviews([...coffeeShop.reviews, parsedReviewResponse.review]);
       }
       if (reviewResponse.status === 401 || reviewResponse.status === 422) {
         const errorMessage = await reviewResponse.json();
@@ -59,26 +67,28 @@ const CoffeeShopShowContainer = (props) => {
   const deleteReview = async (reviewId) => {
     try {
       const deleteResponse = await fetch(`/api/v1/coffee_shops/${coffeeShopId}/reviews/${reviewId}`, {
-        method: "DELETE",
+        method: 'DELETE',
         headers: {
-          "Content-Type": "application/json",
-          "Accept": "application/json"
+          'Content-Type': 'application/json',
+          Accept: 'application/json'
         },
-        body: JSON.stringify({id: reviewId})
+        body: JSON.stringify({ id: reviewId })
       });
       if (deleteResponse.ok) {
         const parsedDeleteResponse = await deleteResponse.json();
-        if(!parsedDeleteResponse.error){
-          let remainingReviews = coffeeShop.reviews.filter(existingReview => existingReview.id !== reviewId)
-        
-        return setCoffeeShop({
-          ...coffeeShop,
-          reviews: remainingReviews
-        });
-      } else {
-        return console.log (parsedDeleteResponse.error)
+        if (!parsedDeleteResponse.error) {
+          let remainingReviews = coffeeShop.reviews.filter(
+            (existingReview) => existingReview.id !== reviewId
+          );
+
+          return setCoffeeShop({
+            ...coffeeShop,
+            reviews: remainingReviews
+          });
+        } else {
+          return console.log(parsedDeleteResponse.error);
+        }
       }
-    }
       const error = new Error(`${deleteResponse.status}: ${deleteResponse.statusText}`);
       throw error;
     } catch (error) {
