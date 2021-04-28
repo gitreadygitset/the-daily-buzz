@@ -8,7 +8,6 @@ const CoffeeShopShowContainer = (props) => {
   const [currentUser, setCurrentUser] = useState({});
   const [errors, setErrors] = useState({});
   const [userVote, setUserVote] = useState(0)
-  let currentUser = coffeeShop.current_user;
   let coffeeShopId = props.match.params.id;
 
   const fetchCoffeeShop = async () => {
@@ -126,8 +125,6 @@ const CoffeeShopShowContainer = (props) => {
       console.error(`Error in fetch: ${error.message}`);
     }
   };
-  
-  const coffeeShopReviews = coffeeShop.reviews;
 
   return (
     <div>
@@ -151,7 +148,7 @@ const CoffeeShopShowContainer = (props) => {
           currentUser={currentUser}
         />
         <ReviewsContainer 
-          reviews={coffeeShopReviews} 
+          reviews={reviews} 
           deleteReview={deleteReview} 
           currentUser={currentUser}
           addUserVote={addUserVote}
