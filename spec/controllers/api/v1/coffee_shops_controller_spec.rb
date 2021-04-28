@@ -21,8 +21,8 @@ RSpec.describe Api::V1::CoffeeShopsController, type: :controller do
       expect(returned_json["coffee_shop"]["zip"]).to eq("02135")
       expect(returned_json["coffee_shop"]["description"]).to eq("Best lattes in town would recommend to a friend.")
       expect(returned_json["coffee_shop"]["image_url"]).to eq(nil)
-      expect(returned_json["coffee_shop"]["reviews"].length).to eq(4)
-      expect(returned_json["coffee_shop"]["current_user"]["username"]).to eq("GuestMember123")
+      expect(returned_json["reviews"].length).to eq(4)
+      expect(returned_json["current_user"]["username"]).to eq("GuestMember123")
 
     end
   end
