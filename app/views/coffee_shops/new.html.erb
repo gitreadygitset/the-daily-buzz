@@ -3,63 +3,50 @@
 <h1>Add Your Favorite Coffee Shop to Our List!</h1>
 
 <%= form_for(@coffee_shop) do |f| %>
-  <div>
-    <%= f.label :name %>
-    <%= f.text_field :name %>
-    <% if error[:name] %>
-      <p class='error'> <%=error[:name].first %> </p>
-    <% end %>
-  </div>
+<div>
+  <%= f.label :name %> <%= f.text_field :name %> <% if error[:name] %>
+  <p class="error"><%=error[:name].first %></p>
+  <% end %>
+</div>
 
-  <div>
-    <%= f.label :address %>
-    <%= f.text_field :address %>
-    <% if error[:address] %>
-      <p class='error'> <%= error[:address].first %> </p>
-    <% end %>
-  </div>
+<div>
+  <%= f.label :address %> <%= f.text_field :address %> <% if error[:address] %>
+  <p class="error"><%= error[:address].first %></p>
+  <% end %>
+</div>
 
-  <div>
-    <%= f.label :city %>
-    <%= f.text_field :city %>
-    <% if error[:city] %>
-      <p class='error'> <%= error[:city].first %> </p>
-    <% end %>
-  </div>
+<div>
+  <%= f.label :city %> <%= f.text_field :city %> <% if error[:city] %>
+  <p class="error"><%= error[:city].first %></p>
+  <% end %>
+</div>
 
-  <div>
-    <%= f.label :state %>
-    <%= f.text_field :state %>
-    <% if error[:state] %>
-      <p class='error'> <%= error[:state].first %> </p>
-    <% end %>
-  </div>
+<div>
+  <%= f.label :state %> <%= f.text_field :state %> <% if error[:state] %>
+  <p class="error"><%= error[:state].first %></p>
+  <% end %>
+</div>
 
-  <div>
-    <%= f.label :zip %>
-    <%= f.text_field :zip %>
-    <% if error[:zip] %>
-      <p class='error'> <%=error[:zip].first %> </p>
-    <% end %>
-  </div>
+<div>
+  <%= f.label :zip %> <%= f.text_field :zip %> <% if error[:zip] %>
+  <p class="error"><%=error[:zip].first %></p>
+  <% end %>
+</div>
 
-  <div>
-    <%= f.label :description %>
-    <%= f.text_area :description, size: "70x3"%>
-    <% if error[:description] %>
-      <p class='error'> <%= error[:description].first %> </p>
-    <% end %>
-  </div>
+<div>
+  <%= f.label :description %> <%= f.text_area :description, size: "70x3"%> <% if error[:description]
+  %>
+  <p class="error"><%= error[:description].first %></p>
+  <% end %>
+</div>
 
-  <div>
-    <%= f.label :image_url %>
-    <%= f.text_field :image_url %>
-    <% if error[:image_url] %>
-      <p class='error'> <%= error[:image_url].first %> </p>
-    <% end %>
-  </div>
+<div>
+  <%= f.label :image_url %> <%= f.text_field :image_url %> <% if error[:image_url] %>
+  <p class="error"><%= error[:image_url].first %></p>
+  <% end %>
+</div>
 
-  <div class="submit">
-    <%= f.submit 'Add Coffee Shop' %>
-  </div>
+<div class="submit">
+  <%= f.submit 'Add Coffee Shop' %>
+</div>
 <% end %>

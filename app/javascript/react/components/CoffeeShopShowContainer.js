@@ -132,6 +132,7 @@ const CoffeeShopShowContainer = (props) => {
         />
         <ReviewsContainer reviews={reviews} deleteReview={deleteReview} currentUser={currentUser} />
       </div>
+      <a href="/coffee_shops">Back to Daily Buzz Home Page</a>
     </div>
   );
 };
