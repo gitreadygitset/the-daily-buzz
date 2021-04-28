@@ -48,8 +48,7 @@ const CoffeeShopShowContainer = (props) => {
       });
       if (reviewResponse.ok) {
         const parsedReviewResponse = await reviewResponse.json();
-
-        setReviews([...reviews, parsedReviewResponse.review]);
+        setReviews([...reviews, parsedReviewResponse]);
       }
       if (reviewResponse.status === 401 || reviewResponse.status === 422) {
         const errorMessage = await reviewResponse.json();

@@ -8,9 +8,9 @@ class Api::V1::ReviewsController < ApplicationController
     review.coffee_shop = coffee_shop
 
     review.user = current_user
-    
+
     if review.save
-      render json: { review: review }
+      render json: review
     else
       render json: { error: review.errors.full_messages }, status: :unprocessable_entity
     end

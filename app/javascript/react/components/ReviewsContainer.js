@@ -11,9 +11,7 @@ const ReviewsContainer = (props) => {
       return (
         <ReviewTile
           key={review.id}
-          id={review.id}
-          rating={review.rating}
-          comment={review.comment}
+          review={review}
           handleClick={handleClick}
           currentUser={props.currentUser}
         />
