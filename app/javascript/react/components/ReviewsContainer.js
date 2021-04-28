@@ -3,11 +3,10 @@ import ReviewTile from './ReviewTile';
 
 const ReviewsContainer = (props) => {
   if (props.reviews.length > 0) {
-    const reviewArray = props.reviews.map((review) => {
+    const reviewArray = props.reviews.map(({ review }) => {
       const handleClick = () => {
         props.deleteReview(review.id);
       };
-
       return (
         <ReviewTile
           key={review.id}

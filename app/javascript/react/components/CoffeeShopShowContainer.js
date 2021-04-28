@@ -14,28 +14,9 @@ const CoffeeShopShowContainer = (props) => {
       const coffeeShopResponse = await fetch(`/api/v1/coffee_shops/${coffeeShopId}`);
       if (coffeeShopResponse.ok) {
         const parsedCoffeeShopResponse = await coffeeShopResponse.json();
-        const coffeeShop = ({
-          name,
-          description,
-          image_url,
-          address,
-          city,
-          state,
-          zip,
-          average_rating
-        }) => ({
-          name,
-          description,
-          image_url,
-          address,
-          city,
-          state,
-          zip,
-          average_rating
-        });
-        setCoffeeShop(coffeeShop(parsedCoffeeShopResponse.coffee_shop));
-        setReviews(parsedCoffeeShopResponse.coffee_shop.reviews);
-        setCurrentUser(parsedCoffeeShopResponse.coffee_shop.current_user);
+        setCoffeeShop(parsedCoffeeShopResponse.coffee_shop);
+        setReviews(parsedCoffeeShopResponse.reviews);
+        setCurrentUser(parsedCoffeeShopResponse.current_user);
       }
     } catch (error) {
       console.error(`Error in fetch: ${error.message}`);
