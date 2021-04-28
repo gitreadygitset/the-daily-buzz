@@ -2,7 +2,7 @@ import React from 'react';
 
 const ReviewTile = (props) => {
   let coffeeRating = [];
-  for (let i = 0; i < props.rating; i++) {
+  for (let i = 0; i < props.review.rating; i++) {
     coffeeRating.push(<i className="fa fa-coffee" aria-hidden="true"></i>);
   }
   let deleteButton;
@@ -20,8 +20,12 @@ const ReviewTile = (props) => {
     <li>
       <span>Rating: </span>
       {coffeeRating}
-      <p>{props.comment}</p>
+      <p>{props.review.comment}</p>
       {deleteButton}
+      <p>Posted by: {props.review.user?.username}</p>
+      <div className="profile-pic-container">
+        <img src={props.review.user?.profile_photo.url}/>
+      </div>
     </li>
   );
 };
