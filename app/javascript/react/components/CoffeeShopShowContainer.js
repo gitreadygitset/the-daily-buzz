@@ -31,8 +31,8 @@ const CoffeeShopShowContainer = (props) => {
       const reviewResponse = await fetch(`/api/v1/coffee_shops/${coffeeShopId}/reviews`, {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
-          Accept: 'application/json'
+          "Content-Type": "application/json",
+          "Accept": "application/json",
         },
         body: JSON.stringify(formPayload)
       });
@@ -55,6 +55,36 @@ const CoffeeShopShowContainer = (props) => {
     }
   };
 
+  const deleteReview = async (reviewId) => {
+    try {
+      const deleteResponse = await fetch(`/api/v1/coffee_shops/${coffeeShopId}/reviews/${reviewId}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json"
+        },
+        body: JSON.stringify({id: reviewId})
+      });
+      if (deleteResponse.ok) {
+        const parsedDeleteResponse = await deleteResponse.json();
+        if(!parsedDeleteResponse.error){
+          let remainingReviews = coffeeShop.reviews.filter(existingReview => existingReview.id !== reviewId)
+        
+        return setCoffeeShop({
+          ...coffeeShop,
+          reviews: remainingReviews
+        });
+      } else {
+        return console.log (parsedDeleteResponse.error)
+      }
+    }
+      const error = new Error(`${deleteResponse.status}: ${deleteResponse.statusText}`);
+      throw error;
+    } catch (error) {
+      console.error(`Error in fetch: ${error.message}`);
+    }
+  };
+  
   const coffeeShopReviews = coffeeShop.reviews;
 
   return (
@@ -78,7 +108,11 @@ const CoffeeShopShowContainer = (props) => {
           errors={errors}
           currentUser={currentUser}
         />
-        <ReviewsContainer reviews={coffeeShopReviews} />
+        <ReviewsContainer 
+          reviews={coffeeShopReviews} 
+          deleteReview={deleteReview} 
+          currentUser={currentUser}
+        />
       </div>
     </div>
   );
