@@ -38,7 +38,7 @@ const ReviewsContainer = (props) => {
   };
 
   if (props.reviews.length > 0) {
-    const reviewArray = props.reviews.map((review) => {
+    const reviewArray = props.reviews.map(({ review }) => {
       const handleClick = () => {
         props.deleteReview(review.id);
       };
@@ -50,9 +50,7 @@ const ReviewsContainer = (props) => {
       return (
         <ReviewTile
           key={review.id}
-          id={review.id}
-          rating={review.rating}
-          comment={review.comment}
+          review={review}
           handleClick={handleClick}
           upVoteClick={upVoteClick}
           currentUser={props.currentUser}

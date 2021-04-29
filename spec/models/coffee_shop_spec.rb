@@ -4,6 +4,9 @@ RSpec.describe CoffeeShop, type: :model do
   let!(:bob) { FactoryBot.create(:user)}
   let!(:test_shop_1) { FactoryBot.create(:coffee_shop, user: bob) }
   let!(:test_shop_2) { FactoryBot.build(:coffee_shop, name: "", user: bob) }
+  let!(:review_1) { FactoryBot.create(:review, rating: 4, coffee_shop: test_shop_1, user: bob) }
+  let!(:review_2) { FactoryBot.create(:review, rating: 5, coffee_shop: test_shop_1, user: bob) }
+  let!(:review_3) { FactoryBot.create(:review, rating: 2, coffee_shop: test_shop_1, user: bob) }
 
 
   describe "#create" do
@@ -35,6 +38,13 @@ RSpec.describe CoffeeShop, type: :model do
         it "does not create a new coffee shop if the description is shorter than 20 characters" do
 
           expect(test_shop_6.save).to eq(false)
+        end
+      end
+    end
+    describe '#average_rating' do
+      context 'Coffee shop has many reviews' do
+        it 'returns the average of all reviews' do
+          expect(test_shop_1.average_rating).to eq(3.7)
         end
       end
     end

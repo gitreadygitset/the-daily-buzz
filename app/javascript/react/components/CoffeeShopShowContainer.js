@@ -15,18 +15,9 @@ const CoffeeShopShowContainer = (props) => {
       const coffeeShopResponse = await fetch(`/api/v1/coffee_shops/${coffeeShopId}`);
       if (coffeeShopResponse.ok) {
         const parsedCoffeeShopResponse = await coffeeShopResponse.json();
-        const coffeeShop = ({ name, description, image_url, address, city, state, zip }) => ({
-          name,
-          description,
-          image_url,
-          address,
-          city,
-          state,
-          zip
-        });
-        setCoffeeShop(coffeeShop(parsedCoffeeShopResponse.coffee_shop));
-        setReviews(parsedCoffeeShopResponse.coffee_shop.reviews);
-        setCurrentUser(parsedCoffeeShopResponse.coffee_shop.current_user);
+        setCoffeeShop(parsedCoffeeShopResponse.coffee_shop);
+        setReviews(parsedCoffeeShopResponse.reviews);
+        setCurrentUser(parsedCoffeeShopResponse.current_user);
       }
       console.log(coffeeShopResponse)
     } catch (error) {
@@ -50,8 +41,7 @@ const CoffeeShopShowContainer = (props) => {
       });
       if (reviewResponse.ok) {
         const parsedReviewResponse = await reviewResponse.json();
-
-        setReviews([...coffeeShop.reviews, parsedReviewResponse.review]);
+        setReviews([...reviews, parsedReviewResponse]);
       }
       if (reviewResponse.status === 401 || reviewResponse.status === 422) {
         const errorMessage = await reviewResponse.json();
@@ -96,9 +86,15 @@ const CoffeeShopShowContainer = (props) => {
     }
   };
 
+  let coffeeRating = [];
+  for (let i = 0; i < coffeeShop.average_rating; i++) {
+    coffeeRating.push(<i className="fa fa-coffee" aria-hidden="true"></i>);
+  }
   return (
     <div>
       <h1 className="coffee-shop-name">{coffeeShop.name}</h1>
+      <p className="rating"> Rating {coffeeRating} </p>
+
       {coffeeShop.image_url ? (
         <div className="shop-image-container">
           <img src={coffeeShop.image_url} />
@@ -123,6 +119,7 @@ const CoffeeShopShowContainer = (props) => {
           currentUser={currentUser}
         />
       </div>
+      <a href="/coffee_shops">Back to Daily Buzz Home Page</a>
     </div>
   );
 };

@@ -10,5 +10,6 @@ CarrierWave.configure do |config|
     else
       config.fog_directory  = ENV["S3_BUCKET_DEVELOPMENT"]
     end
+
   end
 end
