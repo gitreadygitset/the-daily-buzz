@@ -39,11 +39,9 @@ bundle exec rake db:migrate
 bundle exec rake db:seed
 ```
 
-In two separate tabs in your terminal start your servers:
+In your terminal start your server:
 
 `bundle exec rails s`
-
-`yarn run start`
 
 Finally, navigate to http://localhost:3000 in your browser.
 
