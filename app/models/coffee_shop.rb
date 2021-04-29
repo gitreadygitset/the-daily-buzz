@@ -13,8 +13,4 @@ class CoffeeShop < ApplicationRecord
     end
     (rating_array.sum.to_f / rating_array.length).round(1)
   end
-
-  def review_sort
-    object.reviews.order('created_at')
-  end
 end

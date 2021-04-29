@@ -1,4 +1,5 @@
 class Api::V1::UserVotesController < ApplicationController
+  before_action :authenticate_user!
   def create
     review = Review.find(params[:review_id])
     if !UserVote.where(user: current_user, review: review).take
@@ -9,7 +10,7 @@ class Api::V1::UserVotesController < ApplicationController
 
       review.update(score: review.score + user_vote.vote_value)
       coffee_shop = review.coffee_shop
-      reviews = coffee_shop.reviews_sort.map do |review|
+      reviews = coffee_shop.reviews.sort_by(&:created_at).map do |review|
         ActiveModelSerializers::SerializableResource.new(review, {serializer: ReviewsSerializer})
       end
       if user_vote.save
