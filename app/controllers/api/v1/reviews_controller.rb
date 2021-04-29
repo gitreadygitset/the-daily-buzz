@@ -10,7 +10,7 @@ class Api::V1::ReviewsController < ApplicationController
     review.user = current_user
 
     if review.save
-      render json: review
+      render json: review, serializer: ReviewsSerializer
     else
       render json: { error: review.errors.full_messages }, status: :unprocessable_entity
     end
@@ -21,7 +21,7 @@ class Api::V1::ReviewsController < ApplicationController
     review.destroy
     render json: { message: "removed" }, status: :ok
   end
-  
+
   protected
 
   def review_params
