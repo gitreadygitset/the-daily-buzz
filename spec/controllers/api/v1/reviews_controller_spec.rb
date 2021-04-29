@@ -7,7 +7,7 @@ RSpec.describe Api::V1::ReviewsController, type: :controller do
   let!(:review2) { FactoryBot.create(:review, coffee_shop: test_shop, user: user) }
   let!(:review3) { FactoryBot.create(:review, coffee_shop: test_shop, user: user) }
   let!(:review4) { FactoryBot.create(:review, coffee_shop: test_shop, user: user) }
-  
+
   describe "POST#create" do
     it "receives review information which is persisted to the database" do
       sign_in user
@@ -19,7 +19,7 @@ RSpec.describe Api::V1::ReviewsController, type: :controller do
         },
         coffee_shop_id: test_shop.id
       }
-      
+
       prev_count = Review.count
       post :create, params: post_json, format: :json
       returned_json = JSON.parse(response.body)
@@ -42,11 +42,11 @@ RSpec.describe Api::V1::ReviewsController, type: :controller do
 
       expect(response.status).to eq 200
       expect(response.content_type).to eq("application/json")
-      
+
       expect(returned_json).to be_kind_of(Hash)
-      expect(returned_json["id"]).to_not eq(nil)
-      expect(returned_json["rating"]).to eq 3
-      expect(returned_json["comment"]).to eq "Place is great. Would recommend to a friend!!"
+      expect(returned_json["review"]["id"]).to_not eq(nil)
+      expect(returned_json["review"]["rating"]).to eq 3
+      expect(returned_json["review"]["comment"]).to eq "Place is great. Would recommend to a friend!!"
     end
 
   it "shows an error message when fields are left blank" do
