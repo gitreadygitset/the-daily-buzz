@@ -13,7 +13,6 @@ const ReviewTile = (props) => {
       </button>
     );
   }
-
   return (
     <li>
       <span>Rating: </span>
@@ -22,7 +21,7 @@ const ReviewTile = (props) => {
       {deleteButton}
       <p>Posted by: {props.review.user?.username}</p>
       <div className="profile-pic-container">
-        <img src={props.review.user?.profile_photo.url}/>
+        <img src={props.review.user?.profile_photo.url} />
       </div>
     </li>
   );
