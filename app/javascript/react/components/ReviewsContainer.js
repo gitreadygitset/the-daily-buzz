@@ -3,6 +3,7 @@ import ReviewTile from './ReviewTile';
 
 const ReviewsContainer = (props) => {
   const [voteErrors, setVoteErrors] = useState({})
+  const [reviews, setReviews] = useState([])
 
   const addUserVote = async (reviewId, voteValue) => {
     try {
@@ -17,11 +18,11 @@ const ReviewsContainer = (props) => {
       });
       if (voteResponse.ok) {
         const parsedVoteResponse = await voteResponse.json();
-        debugger
-        setReviews({
-          ...reviews,
-          
-        });
+
+        let changedReviewIndex = props.reviews.findIndex(review => {review.id === reviewId})
+        let stateCopy = [...props.reviews]
+        stateCopy[changedReviewIndex] = {review: parsedVoteResponse}
+        props.setReviews([...stateCopy])
       }
       if (voteResponse.status === 401 || voteResponse.status === 422) {
         const errorMessage = await voteResponse.json();
@@ -34,15 +35,21 @@ const ReviewsContainer = (props) => {
       console.error(`Error in fetch: ${error.message}`);
     }
   };
-
+  
   if (props.reviews.length > 0) {
     const reviewArray = props.reviews.map(({ review }) => {
       const handleClick = () => {
         props.deleteReview(review.id);
       };
 
-      const upVoteClick = () => {
+      const upVoteClick = (event) => {
         addUserVote(review.id, 1);
+        event.currentTarget.style.color = "#b2ca90";
+      };
+
+      const downVoteClick = () => {
+        addUserVote(review.id, -1);
+        event.currentTarget.style.color = "#bf3310";
       };
 
       return (
@@ -51,6 +58,7 @@ const ReviewsContainer = (props) => {
           review={review}
           handleClick={handleClick}
           upVoteClick={upVoteClick}
+          downVoteClick={downVoteClick}
           currentUser={props.currentUser}
         />
       );
