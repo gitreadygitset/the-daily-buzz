@@ -4,7 +4,7 @@ class UserVotes < ActiveRecord::Migration[5.2]
       t.belongs_to :user, null: false
       t.belongs_to :review, null: false
 
-      t.integer :vote_count, default: 0
+      t.integer :vote_value, default: 0
     end
   end
 end

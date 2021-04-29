@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 const ReviewTile = (props) => {
+
   let coffeeRating = [];
   for (let i = 0; i < props.rating; i++) {
     coffeeRating.push(<i className="fa fa-coffee" aria-hidden="true"></i>);
@@ -18,7 +19,7 @@ const ReviewTile = (props) => {
 
   return (
     <li>
-      <i class="fas fa-arrow-up" onClick={props.voteClick}></i>
+      <i class="fas fa-arrow-up" onClick={props.upVoteClick}></i>
       <span>Rating: </span>
       {coffeeRating}
       <p>{props.comment}</p>

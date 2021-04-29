@@ -4,5 +4,6 @@ class CoffeeShop < ApplicationRecord
   validates :zip, length: {is: 5}
 
   has_many :reviews
+
   belongs_to :user
 end

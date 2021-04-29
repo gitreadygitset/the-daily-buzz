@@ -7,7 +7,7 @@ const CoffeeShopShowContainer = (props) => {
   const [reviews, setReviews] = useState([]);
   const [currentUser, setCurrentUser] = useState({});
   const [errors, setErrors] = useState({});
-  const [userVote, setUserVote] = useState(0)
+  
   let coffeeShopId = props.match.params.id;
 
   const fetchCoffeeShop = async () => {
@@ -28,6 +28,7 @@ const CoffeeShopShowContainer = (props) => {
         setReviews(parsedCoffeeShopResponse.coffee_shop.reviews);
         setCurrentUser(parsedCoffeeShopResponse.coffee_shop.current_user);
       }
+      console.log(coffeeShopResponse)
     } catch (error) {
       console.error(`Error in fetch: ${error.message}`);
     }
@@ -95,37 +96,6 @@ const CoffeeShopShowContainer = (props) => {
     }
   };
 
-  const addUserVote = async (reviewId) => {
-    try {
-      const voteResponse = await fetch(`/api/v1/coffee_shops/${coffeecoffeeShopId}/reviews/${reviewId}/user_votes`, {
-        method: 'POST',
-        headers: {
-          "Content-Type": "application/json",
-          "Accept": "application/json",
-        },
-        body: JSON.stringify(reviewId)
-      });
-      if (voteResponse.ok) {
-        const parsedVoteResponse = await voteResponse.json();
-        debugger
-
-        setUserVote({
-          ...coffeeShop,
-          ...reviews,
-          user_votes: [...review.user_votes, userVote + 1]
-        });
-      }
-      if (voteResponse.status === 401 || voteResponse.status === 422) {
-        const errorMessage = await voteResponse.json();
-        setErrors({ error: errorMessage.error });
-      }
-      const error = new Error(`${voteResponse.status}: ${voteResponse.statusText}`);
-      throw error;
-    } catch (error) {
-      console.error(`Error in fetch: ${error.message}`);
-    }
-  };
-
   return (
     <div>
       <h1 className="coffee-shop-name">{coffeeShop.name}</h1>
@@ -151,7 +121,6 @@ const CoffeeShopShowContainer = (props) => {
           reviews={reviews} 
           deleteReview={deleteReview} 
           currentUser={currentUser}
-          addUserVote={addUserVote}
         />
       </div>
     </div>

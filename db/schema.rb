@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_28_140816) do
+ActiveRecord::Schema.define(version: 2021_04_28_211934) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,6 +36,7 @@ ActiveRecord::Schema.define(version: 2021_04_28_140816) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id", null: false
+    t.integer "score", default: 0, null: false
     t.index ["coffee_shop_id"], name: "index_reviews_on_coffee_shop_id"
     t.index ["user_id"], name: "index_reviews_on_user_id"
   end
@@ -43,7 +44,7 @@ ActiveRecord::Schema.define(version: 2021_04_28_140816) do
   create_table "user_votes", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "review_id", null: false
-    t.integer "vote_count", default: 0
+    t.integer "vote_value", default: 0
     t.index ["review_id"], name: "index_user_votes_on_review_id"
     t.index ["user_id"], name: "index_user_votes_on_user_id"
   end
