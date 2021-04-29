@@ -10,7 +10,7 @@ class Api::V1::UserVotesController < ApplicationController
     review.update(score: review.score + user_vote.vote_value)
 
     if user_vote.save
-      render json: { review_score: user_vote.review.score }
+      render json: review, Serializer: ReviewsSerializer
     else
       render json: { error: user_vote.errors.full_messages }, status: :unprocessable_entity
     end

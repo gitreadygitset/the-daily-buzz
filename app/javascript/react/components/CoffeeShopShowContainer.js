@@ -117,6 +117,7 @@ const CoffeeShopShowContainer = (props) => {
           reviews={reviews} 
           deleteReview={deleteReview} 
           currentUser={currentUser}
+          setReviews={setReviews}
         />
       </div>
       <a href="/coffee_shops">Back to Daily Buzz Home Page</a>

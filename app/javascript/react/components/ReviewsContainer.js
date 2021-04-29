@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import ReviewTile from './ReviewTile';
 
 const ReviewsContainer = (props) => {
-  const [userVote, setUserVote] = useState()
   const [voteErrors, setVoteErrors] = useState({})
 
   const addUserVote = async (reviewId, voteValue) => {
@@ -19,10 +18,9 @@ const ReviewsContainer = (props) => {
       if (voteResponse.ok) {
         const parsedVoteResponse = await voteResponse.json();
         debugger
-        setUserVote({
-          ...coffeeShop,
+        setReviews({
           ...reviews,
-          user_votes: [...review.user_votes, userVote + 1]
+          
         });
       }
       if (voteResponse.status === 401 || voteResponse.status === 422) {
