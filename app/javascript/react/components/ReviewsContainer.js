@@ -2,31 +2,29 @@ import React, { useState } from 'react';
 import ReviewTile from './ReviewTile';
 
 const ReviewsContainer = (props) => {
-  const [voteErrors, setVoteErrors] = useState({})
-  const [reviews, setReviews] = useState([])
+  const [voteErrors, setVoteErrors] = useState({});
+  const [reviews, setReviews] = useState([]);
 
   const addUserVote = async (reviewId, voteValue) => {
     try {
       const voteResponse = await fetch(`/api/v1/reviews/${reviewId}/user_votes`, {
         method: 'POST',
         headers: {
-          "Content-Type": "application/json",
-          "Accept": "application/json",
-          "credentials": "same-origin"
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+          credentials: 'same-origin'
         },
-        body: JSON.stringify({review_id: reviewId, value: voteValue})
+        body: JSON.stringify({ value: voteValue })
       });
       if (voteResponse.ok) {
         const parsedVoteResponse = await voteResponse.json();
+        debugger;
 
-        let changedReviewIndex = props.reviews.findIndex(review => {review.id === reviewId})
-        let stateCopy = [...props.reviews]
-        stateCopy[changedReviewIndex] = {review: parsedVoteResponse}
-        props.setReviews([...stateCopy])
+        props.setReviews(parsedVoteResponse.reviews);
       }
       if (voteResponse.status === 401 || voteResponse.status === 422) {
         const errorMessage = await voteResponse.json();
-        debugger
+        debugger;
         setVoteErrors({ error: errorMessage.error });
       }
       const error = new Error(`${voteResponse.status}: ${voteResponse.statusText}`);
@@ -35,7 +33,7 @@ const ReviewsContainer = (props) => {
       console.error(`Error in fetch: ${error.message}`);
     }
   };
-  
+
   if (props.reviews.length > 0) {
     const reviewArray = props.reviews.map(({ review }) => {
       const handleClick = () => {
@@ -44,12 +42,12 @@ const ReviewsContainer = (props) => {
 
       const upVoteClick = (event) => {
         addUserVote(review.id, 1);
-        event.currentTarget.style.color = "#b2ca90";
+        event.currentTarget.style.color = '#b2ca90';
       };
 
       const downVoteClick = () => {
         addUserVote(review.id, -1);
-        event.currentTarget.style.color = "#bf3310";
+        event.currentTarget.style.color = '#bf3310';
       };
 
       return (
