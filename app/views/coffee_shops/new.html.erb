@@ -21,7 +21,7 @@
 </div>
 
 <div>
-  <%= f.label :state %> <%= f.text_field :state %> <% if error[:state] %>
+  <%= f.label :state %> <%= f.select :state, states_list %> <% if error[:state] %>
   <p class="error"><%= error[:state].first %></p>
   <% end %>
 </div>

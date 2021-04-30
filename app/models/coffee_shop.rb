@@ -1,7 +1,7 @@
 class CoffeeShop < ApplicationRecord
   validates :name, :address, :city, :state, :zip, presence: true
   validates :description, length: {minimum: 20 }, allow_blank: true
-  validates :zip, length: {is: 5}
+  validates :zip, length: {is: 5}, format: { with: /\A[0-9]*\z/ }
 
   has_many :reviews
   belongs_to :user
