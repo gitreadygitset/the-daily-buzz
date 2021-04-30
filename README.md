@@ -13,7 +13,11 @@ Created by:
 - Nicole Smith
 - Samantha Amodeo
 
-Visit: https://thedailybuzz.herokuapp.com
+### Technologies
+
+The Daily Buzz was created using a Ruby on Rails backend with PostgreSQL database and React JavaScript frontend. We leveraged the Faker gem to create seed data for the website. User functionality and authentication was achieved using the Devise gem. We used CarrierWave to upload photos.
+
+Visit [The Daily Buzz](https://thedailybuzz.herokuapp.com) on Heroku or set up locally with the directions below.
 
 ## Setup
 
@@ -44,6 +48,13 @@ In your terminal start your server:
 `bundle exec rails s`
 
 Finally, navigate to http://localhost:3000 in your browser.
+
+## Features
+
+- View a list of user submitted coffee shops with the highest rated coffee shop featured at the top of the index page.
+- Click on a coffee shop to view the coffee shop details, description and user submitted reviews.
+- Sign up and sign in available for members to add their own coffee shops, review other coffee shops and vote on others' reviews.
+- Administrators can delete user reviews and add their own coffee shops and reviews.
 
 ## TODO
 
