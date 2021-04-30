@@ -45,7 +45,7 @@ const ReviewsContainer = (props) => {
         event.currentTarget.style.color = '#b2ca90';
       };
 
-      const downVoteClick = () => {
+      const downVoteClick = (event) => {
         addUserVote(review.id, -1);
         event.currentTarget.style.color = '#bf3310';
       };
