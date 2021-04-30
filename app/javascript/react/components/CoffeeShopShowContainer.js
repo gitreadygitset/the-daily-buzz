@@ -66,15 +66,12 @@ const CoffeeShopShowContainer = (props) => {
       });
       if (deleteResponse.ok) {
         const parsedDeleteResponse = await deleteResponse.json();
-        if (!parsedDeleteResponse.error) {
-          let remainingReviews = coffeeShop.reviews.filter(
-            (existingReview) => existingReview.id !== reviewId
-          );
 
-          return setCoffeeShop({
-            ...coffeeShop,
-            reviews: remainingReviews
-          });
+        if (!parsedDeleteResponse.error) {
+          let remainingReviews = reviews.filter(
+            (existingReview) => existingReview.review.id !== reviewId
+          );
+          return setReviews([...remainingReviews]);
         } else {
           return console.log(parsedDeleteResponse.error);
         }

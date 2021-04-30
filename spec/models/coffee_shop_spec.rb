@@ -15,7 +15,7 @@ RSpec.describe CoffeeShop, type: :model do
           expect(test_shop_1.name).to eq("Starbucks")
           expect(test_shop_1.address).to eq("123 Fake St.")
           expect(test_shop_1.city).to eq("Boston")
-          expect(test_shop_1.state).to eq("MA")
+          expect(test_shop_1.state).to eq("Massachusetts")
           expect(test_shop_1.zip).to eq("02135")
           expect(test_shop_1.description).to eq("Best lattes in town would recommend to a friend.")
         end

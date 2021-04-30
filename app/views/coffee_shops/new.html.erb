@@ -1,5 +1,4 @@
-<% error = flash[:error] ? flash[:error] : {} %>
-
+<% error = flash[:error] ? flash[:error] : {} %> <% if current_user %>
 <h1>Add Your Favorite Coffee Shop to Our List!</h1>
 
 <%= form_for(@coffee_shop) do |f| %>
@@ -22,7 +21,7 @@
 </div>
 
 <div>
-  <%= f.label :state %> <%= f.text_field :state %> <% if error[:state] %>
+  <%= f.label :state %> <%= f.select :state, states_list %> <% if error[:state] %>
   <p class="error"><%= error[:state].first %></p>
   <% end %>
 </div>
@@ -49,4 +48,4 @@
 <div class="submit">
   <%= f.submit 'Add Coffee Shop' %>
 </div>
-<% end %>
+<% end %> <% else %> <%= "Please Sign in to add your Coffee Shop!" %> <% end %>
