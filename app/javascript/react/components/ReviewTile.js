@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 const ReviewTile = (props) => {
-
   let coffeeRating = [];
   for (let i = 0; i < props.review.rating; i++) {
     coffeeRating.push(<i className="fa fa-coffee" aria-hidden="true"></i>);
@@ -15,18 +14,17 @@ const ReviewTile = (props) => {
     );
   }
   return (
-    <li>
-      <i className="fas fa-arrow-up" onClick={props.upVoteClick}></i>
-      <i className="fas fa-arrow-down" onClick={props.downVoteClick}></i>
-      <span>Score: {props.review.score}</span>
+    <li className="review-tile">
       <span>Rating: </span>
       {coffeeRating}
       <p>{props.review.comment}</p>
-      {deleteButton}
-      <p>Posted by: {props.review.user?.username}</p>
-      <div className="profile-pic-container">
-        <img src={props.review.user?.profile_photo.url} />
+      <div>
+        <div className="profile-pic-container">
+          <img src={props.review.user?.profile_photo.url} />
+        </div>
+        <span className="posted-user">Posted by: {props.review.user?.username}</span>
       </div>
+      {deleteButton}
     </li>
   );
 };

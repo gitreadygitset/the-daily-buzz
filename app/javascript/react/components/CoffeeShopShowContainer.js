@@ -7,7 +7,7 @@ const CoffeeShopShowContainer = (props) => {
   const [reviews, setReviews] = useState([]);
   const [currentUser, setCurrentUser] = useState({});
   const [errors, setErrors] = useState({});
-  
+
   let coffeeShopId = props.match.params.id;
 
   const fetchCoffeeShop = async () => {
@@ -19,7 +19,7 @@ const CoffeeShopShowContainer = (props) => {
         setReviews(parsedCoffeeShopResponse.reviews);
         setCurrentUser(parsedCoffeeShopResponse.current_user);
       }
-      console.log(coffeeShopResponse)
+      console.log(coffeeShopResponse);
     } catch (error) {
       console.error(`Error in fetch: ${error.message}`);
     }
@@ -93,6 +93,9 @@ const CoffeeShopShowContainer = (props) => {
   return (
     <div>
       <h1 className="coffee-shop-name">{coffeeShop.name}</h1>
+      <p className="address">
+        {coffeeShop.address} {coffeeShop.city}, {coffeeShop.state} {coffeeShop.zip}
+      </p>
       <p className="rating"> Rating {coffeeRating} </p>
 
       {coffeeShop.image_url ? (
@@ -100,22 +103,17 @@ const CoffeeShopShowContainer = (props) => {
           <img src={coffeeShop.image_url} />
         </div>
       ) : null}
-      <p>{coffeeShop.address}</p>
-      <p>
-        {coffeeShop.city}, {coffeeShop.state} {coffeeShop.zip}
-      </p>
-      <p>{coffeeShop.description}</p>
+      <p className="coffee-shop-description">{coffeeShop.description}</p>
       <div>
-        <h2>Reviews</h2>
         <ReviewFormContainer
           addNewReview={addNewReview}
           setErrors={setErrors}
           errors={errors}
           currentUser={currentUser}
         />
-        <ReviewsContainer 
-          reviews={reviews} 
-          deleteReview={deleteReview} 
+        <ReviewsContainer
+          reviews={reviews}
+          deleteReview={deleteReview}
           currentUser={currentUser}
           setReviews={setReviews}
         />

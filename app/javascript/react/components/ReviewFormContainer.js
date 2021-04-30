@@ -1,21 +1,21 @@
-import React, { useState } from 'react';
-import _ from 'lodash';
-import ErrorList from './ErrorList';
+import React, { useState } from "react";
+import _ from "lodash";
+import ErrorList from "./ErrorList";
 
 const ReviewFormContainer = (props) => {
   const [formFields, setFormFields] = useState({
-    rating: '',
-    comment: ''
+    rating: "",
+    comment: "",
   });
 
   const validForSubmission = () => {
     let submitErrors = {};
-    const requiredFields = ['rating', 'comment'];
+    const requiredFields = ["rating", "comment"];
     requiredFields.forEach((field) => {
-      if (formFields[field].trim() === '') {
+      if (formFields[field].trim() === "") {
         submitErrors = {
           ...submitErrors,
-          [field]: 'is blank'
+          [field]: "is blank",
         };
       }
     });
@@ -26,7 +26,7 @@ const ReviewFormContainer = (props) => {
   const handleFieldChange = (event) => {
     setFormFields({
       ...formFields,
-      [event.currentTarget.name]: event.currentTarget.value
+      [event.currentTarget.name]: event.currentTarget.value,
     });
   };
 
@@ -35,8 +35,8 @@ const ReviewFormContainer = (props) => {
     if (validForSubmission()) {
       props.addNewReview(formFields);
       setFormFields({
-        rating: '',
-        comment: ''
+        rating: "",
+        comment: "",
       });
     }
   };
@@ -44,8 +44,8 @@ const ReviewFormContainer = (props) => {
   const clearForm = (event) => {
     event.preventDefault();
     setFormFields({
-      rating: '',
-      comment: ''
+      rating: "",
+      comment: "",
     });
   };
   if (_.isEmpty(props.currentUser)) {
@@ -59,33 +59,34 @@ const ReviewFormContainer = (props) => {
     <div>
       <form onSubmit={handleFormSubmit}>
         <ErrorList errors={props.errors} />
+        <h2>Add A Review</h2>
         <div>
           <label>Rating</label>
-            <input
-              name="rating"
-              id="rating"
-              type="number"
-              min={1}
-              max={5}
-              value={formFields.rating}
-              onChange={handleFieldChange}
-            />
+          <input
+            name="rating"
+            id="rating"
+            type="number"
+            min={1}
+            max={5}
+            value={formFields.rating}
+            onChange={handleFieldChange}
+          />
         </div>
         <div>
           <label>Comment</label>
-            <input
-              name="comment"
-              id="comment"
-              type="text"
-              value={formFields.comment}
-              onChange={handleFieldChange}
-            />
+          <input
+            name="comment"
+            id="comment"
+            type="text"
+            value={formFields.comment}
+            onChange={handleFieldChange}
+          />
         </div>
         <div>
           <input type="submit" value="Submit New Review" />
         </div>
         <div>
-          <input type="button" value="Clear Form" onClick={clearForm} />
+          <input className="alert button" type="button" value="Clear Form" onClick={clearForm} />
         </div>
       </form>
     </div>
