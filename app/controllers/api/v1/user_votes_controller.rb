@@ -20,13 +20,4 @@ class Api::V1::UserVotesController < ApplicationController
       end
     end
   end
-
-  def destroy
-  end
-
-  private
-    def secure_params
-      params.require(:user_vote).permit(:review_id)
-    end
-
 end

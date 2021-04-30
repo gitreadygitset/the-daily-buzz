@@ -3,7 +3,6 @@ import ReviewTile from './ReviewTile';
 
 const ReviewsContainer = (props) => {
   const [voteErrors, setVoteErrors] = useState({});
-  const [reviews, setReviews] = useState([]);
 
   const addUserVote = async (reviewId, voteValue) => {
     try {
@@ -18,17 +17,8 @@ const ReviewsContainer = (props) => {
       });
       if (voteResponse.ok) {
         const parsedVoteResponse = await voteResponse.json();
-        debugger;
-
         props.setReviews(parsedVoteResponse.reviews);
       }
-      if (voteResponse.status === 401 || voteResponse.status === 422) {
-        const errorMessage = await voteResponse.json();
-        debugger;
-        setVoteErrors({ error: errorMessage.error });
-      }
-      const error = new Error(`${voteResponse.status}: ${voteResponse.statusText}`);
-      throw error;
     } catch (error) {
       console.error(`Error in fetch: ${error.message}`);
     }
