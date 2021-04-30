@@ -1,4 +1,6 @@
 class CoffeeShopsController < ApplicationController
+  before_action :authenticate_user!, only: [:new, :create]
+
   def index
     @coffee_shops = CoffeeShop.all
   end
