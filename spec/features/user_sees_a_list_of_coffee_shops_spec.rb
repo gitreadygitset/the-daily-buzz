@@ -7,7 +7,6 @@ feature "User can see a list of coffee shops on the index page" do
   let!(:test_shop2) { FactoryBot.create(:coffee_shop, name: 'tarbucks', user: user) }
   let!(:review_2) { FactoryBot.create(:review, coffee_shop: test_shop2, user: user)}
   let!(:test_shop) { FactoryBot.create(:coffee_shop, user: user) }
-  let!(:review_3) { FactoryBot.create(:review, coffee_shop: test_shop, user: user)}
 
   scenario "User visits index page" do
     visit coffee_shops_path
