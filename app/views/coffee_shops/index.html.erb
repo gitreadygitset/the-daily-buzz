@@ -1,11 +1,20 @@
 <h1>Coffee Shops</h1>
 <ul class="coffee-shop-list">
-  <% @coffee_shops.each do |shop| %>
-  <% average_rating = shop.reviews.length > 0 ? "- Rating #{shop.average_rating}" : '' %>
-  <li><strong><%= link_to shop.name, "/coffee_shops/#{shop.id}" %></strong> <%= average_rating %></li>
+  <% @coffee_shops.each do |shop| %> <% average_rating = shop.reviews.length > 0 ? "- Rating
+  #{shop.average_rating}" : '' %>
+  <li>
+    <strong><%= link_to shop.name, "/coffee_shops/#{shop.id}" %></strong> <%= average_rating %>
+  </li>
   <% end %>
 </ul>
+<% if current_user %>
 <div class="form-link">
   <p>Don't see your favorite Coffee Shop?</p>
   <%= link_to "Click here to add it!", new_coffee_shop_path %>
 </div>
+<% else %>
+<div class="form-link">
+  <p>Don't see your favorite Coffee Shop?</p>
+  <%= "Sign up/in to add a new one!"%>
+</div>
+<% end %>
