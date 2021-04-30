@@ -13,7 +13,7 @@ FactoryBot.define do
     name { "Starbucks" }
     address { "123 Fake St." }
     city { "Boston" }
-    state { "MA" }
+    state { "Massachusetts" }
     zip { "02135" }
     description { "Best lattes in town would recommend to a friend." }
   end
