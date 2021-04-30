@@ -2,7 +2,8 @@ class CoffeeShopsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create]
 
   def index
-    @coffee_shops = CoffeeShop.all
+    @coffee_shops = CoffeeShop.order(:name)
+    @top_shop = @coffee_shops.sort { |b,a| a.average_rating <=> b.average_rating }[0]
   end
 
   def new

@@ -7,9 +7,13 @@ class CoffeeShop < ApplicationRecord
   belongs_to :user
 
   def average_rating
-    rating_array = reviews.map do |review|
-      review.rating
+    if reviews.length > 0
+      rating_array = reviews.map do |review|
+        review.rating
+      end
+      (rating_array.sum.to_f / rating_array.length).round(1)
+    else
+      0
     end
-    (rating_array.sum.to_f / rating_array.length).round(1)
   end
 end
