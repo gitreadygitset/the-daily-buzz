@@ -5,35 +5,43 @@ $green: #b2ca90;
 
 html {
   height: 100%;
+  background-color: $secondary;
 }
 
 body {
-  background-color: $primary;
+  background-image: url('https://mspmag.com/downloads/51327/download/shutterstock_250740013.jpg?cb=d4a754598dfd50f39407b250fbbd390a&w=1280');
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  min-height: 500px;
   margin: 0;
   color: $primary;
-  font-family: Georgia, "Times New Roman", Times, serif;
-  min-height: 100%;
+  font-family: Georgia, 'Times New Roman', Times, serif;
 }
 
 form {
   width: 80%;
   margin: 0 auto;
+  margin-bottom: 50px;
+  border: 3px solid $primary;
 }
 
 form label {
   color: $primary;
-  font-family: Georgia, "Times New Roman", Times, serif;
+  font-family: Georgia, 'Times New Roman', Times, serif;
   font-size: 1.2rem;
   float: left;
   display: block;
 }
 
-input[type="submit"] {
+input[type='submit'] {
   background-color: $green;
   padding: 0.75rem;
   color: $primary;
   border: 1px solid $primary;
   font-weight: bold;
+  margin: 1rem 0rem;
 }
 
 .content {
@@ -45,6 +53,7 @@ input[type="submit"] {
   height: 100%;
   text-align: center;
   font-size: 1.2rem;
+  border: 10px solid $primary;
 }
 .error {
   color: #bf3310;
@@ -53,4 +62,12 @@ input[type="submit"] {
 
 .flash-notice {
   background-color: $green;
+}
+
+.content h1 {
+  font-family: 'Abril Fatface', cursive;
+}
+
+h2 {
+  font-family: 'Abril Fatface', cursive;
 }
