@@ -22,16 +22,6 @@ $primary: #673a03;
   width: 75%;
 }
 
-.shop-image-container {
-  width: 90%;
-  margin: 2rem auto;
-}
-
-.shop-image-container img {
-  width: 100%;
-  height: auto;
-}
-
 .user-review-post {
   font-size: 0.9rem;
 }
@@ -53,4 +43,17 @@ $primary: #673a03;
 .posted-user {
   display: inline-block;
   padding-bottom: 38px;
+}
+
+.by-line {
+  display: flex;
+  justify-content: space-between;
+}
+.fa-arrow-up,
+.fa-arrow-down {
+  padding: 0.5rem;
+}
+
+.score {
+  padding-right: 1rem;
 }

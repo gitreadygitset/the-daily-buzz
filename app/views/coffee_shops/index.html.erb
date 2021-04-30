@@ -1,7 +1,9 @@
 <h1>Today's Top Coffee Shop</h1>
 <% if @top_shop %>
 <h2><%= link_to @top_shop.name, "/coffee_shops/#{@top_shop.id}"%></h2>
-<img src="<%=@top_shop.image_url%>" alt="">
+<div class="shop-image-container">
+  <img src="<%=@top_shop.image_url%>" alt="">
+</div>
 <% end %>
 
 <h1>Coffee Shops</h1>
