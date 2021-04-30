@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 const ReviewTile = (props) => {
   let coffeeRating = [];
@@ -6,7 +6,7 @@ const ReviewTile = (props) => {
     coffeeRating.push(<i className="fa fa-coffee" aria-hidden="true"></i>);
   }
   let deleteButton = null;
-  if (props.currentUser?.role === "admin") {
+  if (props.currentUser?.role === 'admin') {
     deleteButton = (
       <button type="button" className="alert button" onClick={props.handleClick}>
         Delete
@@ -15,6 +15,9 @@ const ReviewTile = (props) => {
   }
   return (
     <li className="review-tile">
+      <i className="fas fa-arrow-up" onClick={props.upVoteClick}></i>
+      <i className="fas fa-arrow-down" onClick={props.downVoteClick}></i>
+      <span>Score: {props.review.score}</span>
       <span>Rating: </span>
       {coffeeRating}
       <p>{props.review.comment}</p>

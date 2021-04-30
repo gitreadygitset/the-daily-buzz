@@ -4,6 +4,7 @@ class CoffeeShop < ApplicationRecord
   validates :zip, length: {is: 5}, format: { with: /\A[0-9]*\z/ }
 
   has_many :reviews
+
   belongs_to :user
 
   def average_rating
