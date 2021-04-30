@@ -16,7 +16,7 @@ feature "User adds a new coffee shop" do
     fill_in 'Name', with: "Fuel"
     fill_in 'Address', with: "152 Chestnut Hill Ave."
     fill_in 'City', with: "Brighton"
-    fill_in 'State', with: "MA"
+    select 'Massachusetts', from: 'State'    
     fill_in 'Zip', with: "02135"
     click_button 'Add Coffee Shop'
 
